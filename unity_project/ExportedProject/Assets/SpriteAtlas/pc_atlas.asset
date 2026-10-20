@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &687078895
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: pc_atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: dc6eb3b3e09f9ad448b0dec95011e451, type: 3}
+    - {fileID: 21300002, guid: dc6eb3b3e09f9ad448b0dec95011e451, type: 3}
+    - {fileID: 21300004, guid: dc6eb3b3e09f9ad448b0dec95011e451, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys: []
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: dc6eb3b3e09f9ad448b0dec95011e451, type: 3}
+  - {fileID: 21300002, guid: dc6eb3b3e09f9ad448b0dec95011e451, type: 3}
+  - {fileID: 21300004, guid: dc6eb3b3e09f9ad448b0dec95011e451, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - keyboad_space
+  - keyboad_wasd_arrows
+  - keyboad_nitro
+  m_RenderDataMap:
+  - first:
+      3c51cab3e6f34ae48b2bd45d4ca0669d: 21300000
+    second:
+      texture: {fileID: 2800000, guid: dc6eb3b3e09f9ad448b0dec95011e451, type: 3}
+      alphaTexture: {fileID: 0}
+      textureRect:
+        serializedVersion: 2
+        x: 0
+        y: 226
+        width: 508
+        height: 77
+      textureRectOffset: {x: 0, y: 0}
+      atlasRectOffset: {x: 0, y: 226}
+      uvTransform: {x: 100, y: 254, z: 100, w: 264.5}
+      downscaleMultiplier: 1
+      settingsRaw: 67
+      secondaryTextures: []
+  - first:
+      ac7f97d41b7694a4f90f1e685117d420: 21300000
+    second:
+      texture: {fileID: 2800000, guid: dc6eb3b3e09f9ad448b0dec95011e451, type: 3}
+      alphaTexture: {fileID: 0}
+      textureRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 471
+        height: 128
+      textureRectOffset: {x: 0, y: 0}
+      atlasRectOffset: {x: 0, y: 0}
+      uvTransform: {x: 100, y: 235.5, z: 100, w: 64}
+      downscaleMultiplier: 1
+      settingsRaw: 67
+      secondaryTextures: []
+  - first:
+      7dd088dc79abafa4faecb72edbcc716f: 21300000
+    second:
+      texture: {fileID: 2800000, guid: dc6eb3b3e09f9ad448b0dec95011e451, type: 3}
+      alphaTexture: {fileID: 0}
+      textureRect:
+        serializedVersion: 2
+        x: 0
+        y: 132
+        width: 501
+        height: 90
+      textureRectOffset: {x: 0, y: 0}
+      atlasRectOffset: {x: 0, y: 132}
+      uvTransform: {x: 100, y: 250.5, z: 100, w: 177}
+      downscaleMultiplier: 1
+      settingsRaw: 67
+      secondaryTextures: []
+  m_Tag: pc_atlas
+  m_IsVariant: 0

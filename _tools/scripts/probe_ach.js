@@ -1,0 +1,3 @@
+(() => { const gg = [...__world().objects].map(o => o.GetComponent('GUIGarage')).find(Boolean); gg.ButtonAchievements(); return 'ach'; })()
+@@@
+(() => { const el = [...document.querySelectorAll('.ug')].find(e => e.dataset.name === 'bg_left' && e.offsetParent); if (!el) return 'none'; const img = el.querySelector('.ug-img'); const cs = getComputedStyle(el); return { disp: cs.display, op: cs.opacity, w: el.style.width, h: el.style.height, l: el.style.left, t: el.style.top, tr: el.style.transform, img: img && { bg: img.style.backgroundImage.slice(0, 80), size: img.style.backgroundSize, filter: img.style.filter, disp: img.style.display, op: img.style.opacity } }; })()

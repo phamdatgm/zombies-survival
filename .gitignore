@@ -1,0 +1,18 @@
+# Large third-party tools (Ghidra, JDK, AssetRipper, Il2CppDumper, zips, logs) — keep only our scripts
+_tools/*
+!_tools/scripts/
+_tools/scripts/**/__pycache__/
+
+# Unpacked APK/XAPK and il2cpp dump — regenerable from the original APK
+_raw/
+dump/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.log

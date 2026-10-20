@@ -1,0 +1,1245 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1709254077376921
+GameObject:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Component:
+  - component: {fileID: 4618682377417806}
+  - component: {fileID: 114703437598541787}
+  m_Layer: 0
+  m_Name: _MainData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1730242686860875
+GameObject:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Component:
+  - component: {fileID: 4884547391421755}
+  - component: {fileID: 114099118695303065}
+  m_Layer: 0
+  m_Name: translations
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1724804207875695
+GameObject:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Component:
+  - component: {fileID: 4243736805655561}
+  - component: {fileID: 82061268324235159}
+  - component: {fileID: 114587765826080250}
+  - component: {fileID: 81709867586078768}
+  m_Layer: 0
+  m_Name: sounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4618682377417806
+Transform:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709254077376921}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4884547391421755}
+  - {fileID: 4243736805655561}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
+--- !u!114 &114703437598541787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709254077376921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed113cac4f597fbafb441771910b0e67, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  EFLOANMJHJF: {fileID: 114099118695303065}
+  GDPCMIGAPOM:
+  - name: Rookie
+    prefab_name: 00_SA_Veh_Van
+    price: 0
+    price_premium: 0
+    upgrades_coefficient: 1
+    upgrades_coefficient_premium: 1
+    upgrades_coefficient_premium_pc: 1
+    upgrade_price_last_armor: 0
+    health_array: 6400000064000000640000006400000064000000e6000000
+    health_5lvl_premium: 0
+    event_race_mode: 0
+    free_color_id: 0
+  - name: Classic
+    prefab_name: 01_SA_Veh_OldCar
+    price: 0
+    price_premium: 0
+    upgrades_coefficient: 1
+    upgrades_coefficient_premium: 1
+    upgrades_coefficient_premium_pc: 1
+    upgrade_price_last_armor: 60
+    health_array: 78000000a0000000f0000000180100004001000090010000
+    health_5lvl_premium: 320
+    event_race_mode: 0
+    free_color_id: 3
+  - name: Sheriff
+    prefab_name: 02_SA_Veh_SheriffCar
+    price: 1000
+    price_premium: 700
+    upgrades_coefficient: 1.25
+    upgrades_coefficient_premium: 1.25
+    upgrades_coefficient_premium_pc: 1.25
+    upgrade_price_last_armor: 70
+    health_array: 96000000c8000000fa0000002c0100005e010000f4010000
+    health_5lvl_premium: 400
+    event_race_mode: 0
+    free_color_id: 2
+  - name: Zombie Cream
+    prefab_name: 03_SA_Veh_IceCream
+    price: 5300
+    price_premium: 2800
+    upgrades_coefficient: 2.7
+    upgrades_coefficient_premium: 3
+    upgrades_coefficient_premium_pc: 2.7
+    upgrade_price_last_armor: 80
+    health_array: fa0000002c0100005e01000090010000c201000058020000
+    health_5lvl_premium: 500
+    event_race_mode: 0
+    free_color_id: 1
+  - name: Hot Rod
+    prefab_name: 04_SA_Veh_HotRod
+    price: 13000
+    price_premium: 5000
+    upgrades_coefficient: 4.3
+    upgrades_coefficient_premium: 4.3
+    upgrades_coefficient_premium_pc: 3.5
+    upgrade_price_last_armor: 90
+    health_array: 90010000c2010000f40100002602000058020000ee020000
+    health_5lvl_premium: 650
+    event_race_mode: 0
+    free_color_id: 3
+  - name: School Bus
+    prefab_name: 05_SA_Veh_Schoolbus
+    price: 25000
+    price_premium: 9500
+    upgrades_coefficient: 9
+    upgrades_coefficient_premium: 9
+    upgrades_coefficient_premium_pc: 8
+    upgrade_price_last_armor: 100
+    health_array: c20100000d02000058020000a3020000ee02000084030000
+    health_5lvl_premium: 825
+    event_race_mode: 0
+    free_color_id: 2
+  - name: Monster Truck
+    prefab_name: 06_SA_Veh_MonsterTruck
+    price: 38000
+    price_premium: 15000
+    upgrades_coefficient: 12
+    upgrades_coefficient_premium: 11
+    upgrades_coefficient_premium_pc: 9
+    upgrade_price_last_armor: 110
+    health_array: f401000058020000bc02000020030000840300004c040000
+    health_5lvl_premium: 1000
+    event_race_mode: 0
+    free_color_id: 4
+  - name: Buggy
+    prefab_name: 07_SA_Veh_Buggy
+    price: 50000
+    price_premium: 19000
+    upgrades_coefficient: 16
+    upgrades_coefficient_premium: 14
+    upgrades_coefficient_premium_pc: 10
+    upgrade_price_last_armor: 120
+    health_array: f40100008a02000020030000b60300004c04000014050000
+    health_5lvl_premium: 1200
+    event_race_mode: 0
+    free_color_id: 2
+  - name: Prime
+    prefab_name: 08_SA_Veh_WarTruck
+    price: 65000
+    price_premium: 25000
+    upgrades_coefficient: 18
+    upgrades_coefficient_premium: 14
+    upgrades_coefficient_premium_pc: 11
+    upgrade_price_last_armor: 130
+    health_array: f4010000bc020000840300004c04000014050000dc050000
+    health_5lvl_premium: 1400
+    event_race_mode: 0
+    free_color_id: 4
+  - name: APC
+    prefab_name: 09_SA_Veh_APC
+    price: 85000
+    price_premium: 30000
+    upgrades_coefficient: 21
+    upgrades_coefficient_premium: 16
+    upgrades_coefficient_premium_pc: 12
+    upgrade_price_last_armor: 140
+    health_array: f4010000ee020000e8030000e2040000dc050000a4060000
+    health_5lvl_premium: 1600
+    event_race_mode: 0
+    free_color_id: 3
+  - name: Harvester
+    prefab_name: 10_SA_Veh_Harvester
+    price: 95000
+    price_premium: 35000
+    upgrades_coefficient: 25
+    upgrades_coefficient_premium: 17
+    upgrades_coefficient_premium_pc: 14
+    upgrade_price_last_armor: 150
+    health_array: f4010000200300004c04000078050000a4060000d0070000
+    health_5lvl_premium: 1900
+    event_race_mode: 0
+    free_color_id: 2
+  - name: Wobbler
+    prefab_name: 11_SA_Veh_Wobbler
+    price: 0
+    price_premium: 0
+    upgrades_coefficient: 4.3
+    upgrades_coefficient_premium: 4.3
+    upgrades_coefficient_premium_pc: 4.3
+    upgrade_price_last_armor: 90
+    health_array: f4010000200300004c04000078050000a4060000d0070000
+    health_5lvl_premium: 650
+    event_race_mode: 1
+    free_color_id: 3
+  - name: Intro
+    prefab_name: 000_SA_Veh_BigMonsterTruck
+    price: 0
+    price_premium: 0
+    upgrades_coefficient: 1
+    upgrades_coefficient_premium: 1
+    upgrades_coefficient_premium_pc: 1
+    upgrade_price_last_armor: 90
+    health_array: f4010000200300004c04000078050000a4060000d0070000
+    health_5lvl_premium: 650
+    event_race_mode: 0
+    free_color_id: 0
+  HOAGFBCFGKN:
+    id: -1
+    translate_key:
+    scene_id: level_000
+    tasks:
+    - type: 0
+      count: 0
+    - type: 0
+      count: 0
+    - type: 0
+      count: 0
+    - type: 0
+      count: 0
+    unlock_after_lvl_id: 0
+    progress_percent: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  IHPBACJOJMA:
+  - id: 0
+    translate_key:
+    scene_id: level_0
+    tasks:
+    - type: 0
+      count: 45
+    - type: 1
+      count: 1
+    - type: 3
+      count: 1
+    unlock_after_lvl_id: 0
+    progress_percent: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000a0000000a0000000b0000000b0000000c0000000c0000000d0000000d0000000e0000000e000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 1
+    translate_key:
+    scene_id: level_1_beach
+    tasks:
+    - type: 0
+      count: 105
+    - type: 1
+      count: 2
+    - type: 3
+      count: 1
+    unlock_after_lvl_id: 0
+    progress_percent: 0e0000000f000000100000001000000011000000110000001200000014000000190000001a0000001c0000001f000000220000002300000024000000270000002a0000002c0000002e0000003000000032000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 2
+    translate_key:
+    scene_id: level_2_desert
+    tasks:
+    - type: 0
+      count: 110
+    - type: 2
+      count: 1
+    - type: 3
+      count: 1
+    unlock_after_lvl_id: 0
+    progress_percent: 320000003300000035000000350000003600000037000000380000003a0000003c0000003e0000004000000041000000420000004300000045000000460000004700000048000000490000004a0000004b000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 3
+    translate_key:
+    scene_id: level_3_winter
+    tasks:
+    - type: 0
+      count: 120
+    - type: 2
+      count: 2
+    - type: 3
+      count: 1
+    unlock_after_lvl_id: 0
+    progress_percent: 4b0000004c0000004d0000004d0000004e0000004e0000004e0000004e0000004e0000004e0000004f00000050000000510000005100000052000000520000005200000053000000540000005400000055000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 4
+    translate_key:
+    scene_id: level_4_city
+    tasks:
+    - type: 0
+      count: 130
+    - type: 1
+      count: 3
+    - type: 3
+      count: 1
+    unlock_after_lvl_id: 0
+    progress_percent: 550000005500000055000000550000005500000055000000550000005500000055000000550000005600000056000000570000005700000058000000590000005a0000005a0000005b0000005b0000005c000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 5
+    translate_key:
+    scene_id: level_5_beach
+    tasks:
+    - type: 0
+      count: 140
+    - type: 1
+      count: 3
+    - type: 3
+      count: 1
+    unlock_after_lvl_id: 0
+    progress_percent: 5c0000005d0000005d0000005d0000005d0000005d0000005d0000005d0000005d0000005d0000005d0000005d0000005d0000005d0000005d0000005d0000005d0000005d0000005e0000005e0000005e000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 6
+    translate_key:
+    scene_id: level_6_desert
+    tasks:
+    - type: 0
+      count: 150
+    - type: 1
+      count: 4
+    - type: 3
+      count: 1
+    unlock_after_lvl_id: 0
+    progress_percent: 5e0000005e0000005e0000005e0000005e0000005e0000005e0000005e0000005e0000005e0000005f0000005f0000005f0000005f0000005f0000005f0000005f0000005f0000005f0000005f0000005f000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 7
+    translate_key:
+    scene_id: level_7_winter
+    tasks:
+    - type: 0
+      count: 160
+    - type: 2
+      count: 3
+    - type: 3
+      count: 1
+    unlock_after_lvl_id: 0
+    progress_percent: 5f0000005f0000005f0000005f0000005f0000005f0000005f0000005f0000005f0000005f0000006000000060000000600000006000000060000000600000006000000060000000600000006000000060000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 8
+    translate_key:
+    scene_id: level_8_city
+    tasks:
+    - type: 0
+      count: 170
+    - type: 1
+      count: 4
+    - type: 3
+      count: 1
+    unlock_after_lvl_id: 0
+    progress_percent: 600000006000000060000000600000006000000060000000600000006000000060000000600000006100000061000000610000006100000061000000610000006100000061000000610000006100000061000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 9
+    translate_key:
+    scene_id: level_9_beach
+    tasks:
+    - type: 0
+      count: 180
+    - type: 2
+      count: 4
+    - type: 3
+      count: 1
+    unlock_after_lvl_id: 0
+    progress_percent: 610000006100000061000000610000006100000061000000610000006100000061000000610000006200000062000000620000006200000062000000620000006200000062000000620000006200000062000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 10
+    translate_key:
+    scene_id: level_10_desert
+    tasks:
+    - type: 0
+      count: 190
+    - type: 1
+      count: 5
+    - type: 3
+      count: 1
+    unlock_after_lvl_id: 0
+    progress_percent: 620000006200000062000000620000006200000062000000620000006200000062000000620000006300000063000000630000006300000063000000630000006300000063000000630000006300000063000000
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 100
+    translate_key:
+    scene_id: level_event_3
+    tasks: []
+    unlock_after_lvl_id: 1
+    progress_percent:
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 101
+    translate_key:
+    scene_id: level_1_beach
+    tasks: []
+    unlock_after_lvl_id: 4
+    progress_percent:
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  - id: 102
+    translate_key:
+    scene_id: level_1_beach
+    tasks: []
+    unlock_after_lvl_id: 2
+    progress_percent:
+    event_contest:
+      id: 0
+      lvl_id: 0
+      mode: 0
+      status: 0
+      reward: []
+      time: 0
+      replays: []
+    reward_completed_event:
+      car: 0
+      silver: 0
+      gold: 0
+      fuel: 0
+    event_replay_ghost:
+      pos: 0
+      id: 0
+      user_id: 0
+      car_id: 0
+      country_id: 0
+      name:
+      time: 0
+      points: 0
+      path:
+      is_completed: 0
+    is_event_attention_icon: 0
+  HEIGOLFEAHJ:
+  - id: 0
+    GPGSID: CgkI2pHJjd4ZEAIQAQ
+    GCID: PS_ACH_FIRST_LVL
+    count: 1
+    reward: 20
+  - id: 1
+    GPGSID: CgkI2pHJjd4ZEAIQAg
+    GCID: PS_ACH_ZOMBIES_KILL
+    count: 800
+    reward: 30
+  - id: 2
+    GPGSID: CgkI2pHJjd4ZEAIQAw
+    GCID: PS_ACH_BACK_FLIPS
+    count: 10
+    reward: 30
+  - id: 3
+    GPGSID: CgkI2pHJjd4ZEAIQBA
+    GCID: PS_ACH_FRONT_FLIPS
+    count: 10
+    reward: 30
+  - id: 4
+    GPGSID: CgkI2pHJjd4ZEAIQBQ
+    GCID: PS_ACH_CRASH_CAR
+    count: 25
+    reward: 30
+  - id: 5
+    GPGSID: CgkI2pHJjd4ZEAIQBg
+    GCID: PS_ACH_BIRDS_KILL
+    count: 6
+    reward: 50
+  - id: 6
+    GPGSID: CgkI2pHJjd4ZEAIQBw
+    GCID: PS_ACH_ANY_LVL_3_STARS
+    count: 1
+    reward: 50
+  - id: 7
+    GPGSID: CgkI2pHJjd4ZEAIQCA
+    GCID: PS_ACH_UPGRADE_ANY_CAR
+    count: 1
+    reward: 50
+  - id: 8
+    GPGSID: CgkI2pHJjd4ZEAIQCQ
+    GCID: PS_ACH_GRAND_TOTAL_POINTS
+    count: 5000
+    reward: 100
+  - id: 9
+    GPGSID: CgkI2pHJjd4ZEAIQCg
+    GCID: PS_ACH_ALL_STARS
+    count: 1
+    reward: 200
+  NGBIFHJDNEC:
+  - encyclopediaItem: 0
+    damage: 1
+    money: 3
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: ab124fd331f20d14caf71e8378da7556, type: 3}
+    is_open_by_default: 1
+    status: 0
+  - encyclopediaItem: 1
+    damage: 3
+    money: 20
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 230cab31c0b887848b04ba0cf99e72d7, type: 3}
+    is_open_by_default: 1
+    status: 0
+  - encyclopediaItem: 2
+    damage: 6
+    money: 60
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: c8427db0fc2d118428770c7bfa906024, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 3
+    damage: 6
+    money: 60
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 3f842b57b7091f74a8f52b1911e13b5a, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 4
+    damage: 10
+    money: 120
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 1808d81fff21db84f85796a7869861b9, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 5
+    damage: 10
+    money: 120
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: a451d57bfad3ebb4c8d8cca53ca8b455, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 6
+    damage: 10
+    money: 120
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 2278658fa1976054b99e7d425080411f, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 7
+    damage: 15
+    money: 180
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 6f94be57ad04453449ffabef2aaa078c, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 8
+    damage: 15
+    money: 180
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: dfc81cfae6ebbcd479ef7e330cd4d2e8, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 9
+    damage: 40
+    money: 1000
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: bac5091f8becdf44eb8cb3345d3f184b, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 10
+    damage: 15
+    money: 0
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 573561de5bcf94b44886a7428eee81eb, type: 3}
+    is_open_by_default: 1
+    status: 0
+  - encyclopediaItem: 11
+    damage: 25
+    money: 0
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 172b12327fa12e946938f369a7e0e5dc, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 12
+    damage: 40
+    money: 0
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 30f54fcdd97558246b4a653c51abc35b, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 13
+    damage: 50
+    money: 0
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 866466533429a9a4d9885928b5a7caf0, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 14
+    damage: 50
+    money: 0
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: fab513971e224d84fb74af626b724ff9, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 15
+    damage: 3
+    money: 0
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 02891f78bb9b51847ace84e3b5f4721d, type: 3}
+    is_open_by_default: 1
+    status: 0
+  - encyclopediaItem: 16
+    damage: 5
+    money: 0
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: ff059d3341e5ec741b3609ea39699218, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 17
+    damage: 60
+    money: 0
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 6972a65ee31a6ac40b47fd7df13db647, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 18
+    damage: 20
+    money: 0
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 424dc526ce79f6d469cf79faf0fd8d41, type: 3}
+    is_open_by_default: 0
+    status: 0
+  - encyclopediaItem: 19
+    damage: 60
+    money: 0
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 5670ba9f1de9ded43b3d1b7d1e4cb16c, type: 3}
+    is_open_by_default: 1
+    status: 0
+  - encyclopediaItem: 20
+    damage: 9999
+    money: 0
+    title:
+    desc:
+    icon: {fileID: 21300000, guid: 5aaf6894850a6294a959cc5562071005, type: 3}
+    is_open_by_default: 1
+    status: 0
+  NNMCBNGFPHF: 00000000010000000a0000000f000000130000001400000010000000030000000b00000012000000020000000e0000000c0000000d00000004000000050000001100000008000000070000000900000006000000
+  DBJNKIMHIIK:
+    serializedVersion: 2
+    m_Bits: 44032
+  BPNBGKOCLHM: {fileID: 2100000, guid: a32475c6c00beb347b29920bf0f20631, type: 2}
+  NFFBOJAIMFC: {fileID: 2100000, guid: b817a4a7ba23db845a47f79f8b660bca, type: 2}
+  CHNMADAPBIE: {fileID: 2100000, guid: 4259745a68b36964e86afd9b6c23c54d, type: 2}
+  AKLICMLFBKC: {fileID: 2100000, guid: 193320edfbc242740afac81e2a94313b, type: 2}
+  PBMGAKJJIMJ: {fileID: 2100000, guid: 48d6feec6c191fb4684ce05eafd368c4, type: 2}
+--- !u!4 &4884547391421755
+Transform:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730242686860875}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4618682377417806}
+  m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
+--- !u!114 &114099118695303065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730242686860875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5e13e087c171d1e800f1a3b57ddf8d2, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  PMDALDGOEKK: d
+  OBFHPMAPGAM: h
+  CCEPOBMNPFA: {fileID: 114587765826080250}
+  LHIAELGGOEG: {fileID: 0}
+  JJIFCBOGHHP:
+  - system_name: English
+    native_name: English
+    flag: {fileID: 21300030, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: German
+    native_name: Deutsch
+    flag: {fileID: 21300006, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: French
+    native_name: Français
+    flag: {fileID: 21300056, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: Italian
+    native_name: Italiano
+    flag: {fileID: 21300018, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: Spanish
+    native_name: Español
+    flag: {fileID: 21300026, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: Portuguese
+    native_name: Português
+    flag: {fileID: 21300024, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: Polish
+    native_name: Polski
+    flag: {fileID: 21300022, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: Russian
+    native_name: Русский
+    flag: {fileID: 21300044, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: Ukrainian
+    native_name: Українська
+    flag: {fileID: 21300032, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: Turkish
+    native_name: Türkçe
+    flag: {fileID: 21300008, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: Japanese
+    native_name: 日本語
+    flag: {fileID: 21300058, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: ChineseSimplified
+    native_name: 简体中文
+    flag: {fileID: 21300002, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+  - system_name: ChineseTraditional
+    native_name: 繁體中文
+    flag: {fileID: 21300010, guid: 8619205234e339943a42a5654f3868c4, type: 3}
+--- !u!4 &4243736805655561
+Transform:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724804207875695}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4618682377417806}
+  m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
+--- !u!82 &82061268324235159
+AudioSource:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724804207875695}
+  m_Enabled: 1
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &114587765826080250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724804207875695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abafba87fdc11b5ff300148a98967c56, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  HHGBKCLFKDP:
+  - {fileID: 8300000, guid: 681217687ef7d334bbdb8d1a35f4ad9c, type: 3}
+  - {fileID: 8300000, guid: 480a50fda1ec2764c8e5433a11232e69, type: 3}
+  - {fileID: 8300000, guid: 8925720b99ac4fd4ea87c567e194f86d, type: 3}
+  - {fileID: 8300000, guid: b194047e9c61baf47ae06772024fa251, type: 3}
+  EMAPPFDBJPN:
+  - {fileID: 8300000, guid: 499c0f0ffba8fb14ea6dc391ade770aa, type: 3}
+  - {fileID: 8300000, guid: 312197c8f398acd4cb928ba48b957708, type: 3}
+  JINEIILKJFA:
+  - {fileID: 8300000, guid: 8977cfabf35bbb34f848b03d7c9fb124, type: 3}
+  - {fileID: 8300000, guid: 1f979456cf54ad84c945bc740b351899, type: 3}
+  JGIHDHHNPMH: {fileID: 8300000, guid: e6c5628b27c38434b8c510867f05ddf2, type: 3}
+  ILPOOCBOEPL: {fileID: 8300000, guid: a4a889426d3d2e942a2a564bf622c8e5, type: 3}
+  IFKPKPNGBIP: {fileID: 8300000, guid: ff2fd770488777f47a09202b1cf043dc, type: 3}
+  DPJBAHHHOAN: {fileID: 8300000, guid: b050fb78d96d8cf4e9fc2f585d87508f, type: 3}
+  IDPBPFEFHDN: {fileID: 8300000, guid: 7dde84aee36cde94e85c213664ba5ff7, type: 3}
+  HFIFLHJGCID: {fileID: 8300000, guid: be355e6d9260f174ea13f1bd73e5e6c8, type: 3}
+  FEAOJCPGIDF: {fileID: 8300000, guid: 7c3f1e030805c3849b3cd2b2e54d7006, type: 3}
+  IGICPCMIONE: {fileID: 8300000, guid: 5d022c1d4c7aec747991a305669c3efe, type: 3}
+  AAKIHMDFLDF: {fileID: 8300000, guid: 28f695e3afe87ba47baaee541d233b99, type: 3}
+  BCMFAINFNPO: {fileID: 8300000, guid: 7f34165e25a506d469389966f67d3910, type: 3}
+  FIFDBNPONCH: {fileID: 8300000, guid: 0e67ef7831de5b248adc3b1e1bd1737f, type: 3}
+  LJOMOHCDBII: {fileID: 8300000, guid: 48eb5d6f110e58340850d15ec2e53f4a, type: 3}
+  PBBIKCIIKDA: {fileID: 8300000, guid: 52d1a7f1328b81d41a8639d42d2d2d9a, type: 3}
+  BNKLKIBDNLG: {fileID: 8300000, guid: 15b4c8c9ff1a8a141b1f1d3a5970d592, type: 3}
+  JCBFCJIPCKK: {fileID: 8300000, guid: 12a09b72449d39147b68e7c86a32eb9c, type: 3}
+  BPCMAPLDOAC: {fileID: 8300000, guid: 218850a3d9ad9b14eb3503923aaeb583, type: 3}
+  HKAOKEKOGOE:
+  - {fileID: 8300000, guid: 016a023ce7d14044db692b9951677abe, type: 3}
+  - {fileID: 8300000, guid: 16af9bcca99245b4c882e50cce849212, type: 3}
+  - {fileID: 8300000, guid: fc1bda76e204d9d45a3ddfe9f0930ad1, type: 3}
+--- !u!81 &81709867586078768
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724804207875695}
+  m_Enabled: 1
