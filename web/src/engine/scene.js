@@ -189,6 +189,9 @@ export const SceneManager = {
     // render settings / lightmaps
     // a Mixed directional light (Subtractive) is baked into the lightmaps: no direct light on lightmapped meshes
     LM.direct.value = json.nodes.some((n) => n.type === 'Light' && n.props && n.props.m_Type === 1 && n.props.m_Lightmapping === 1) ? 0 : 1;
+    // Light.m_CullingMask of the realtime/mixed directional lights (the only runtime lights): layers outside it get no sun
+    const dirs = json.nodes.filter((n) => n.type === 'Light' && n.props && n.props.m_Type === 1 && n.props.m_Lightmapping !== 2 && n.props.m_Enabled !== 0);
+    LM.dirMask = dirs.length ? dirs.reduce((m, n) => m | ((n.props.m_CullingMask ? n.props.m_CullingMask.m_Bits : -1) | 0), 0) : -1;
     RenderState.lightmaps = (json.lightmaps || []).map((k) => { const t = k && getTexture(k); if (t) { t.colorSpace = THREE.NoColorSpace; } return t; });
     const rs = json.nodes.find((n) => n.type === 'RenderSettings');
     applyRenderSettings(w, rs && rs.props);

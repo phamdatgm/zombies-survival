@@ -11,6 +11,7 @@ import { GameBehaviour, alive, define } from '../base.js';
 import { G } from '../G.js';
 import { E } from '../enums.js';
 import { T as LangT } from '../util.js';
+import { race } from '../analytics.js';
 
 // ---------------------------------------------------------------- helpers
 const POF = E.GUIGameplay_POFCDOMOIBH;
@@ -448,7 +449,8 @@ export class GUIGameplay extends GameBehaviour {
   }
 
   ButtonRestart(_use_fuel) {
-    // AnalyticsController.OJNGEGNNOME / AdvController.NKNJOFHCDIF (interstitial) [removed: analytics/ads]
+    // AnalyticsController.OJNGEGNNOME / AdvController.NKNJOFHCDIF (interstitial) [removed: ads]
+    race.restart();   // [web] analytics: RestartTime (only while the race is still on)
     const car = this.EGEINPCIEON, S = SS();
     if (car && alive(car.ECNAMAJCDGI)) car.ECNAMAJCDGI.Stop();
     if (alive(S.IMKHCBJCJNB)) S.IMKHCBJCJNB.Pause();
@@ -458,6 +460,7 @@ export class GUIGameplay extends GameBehaviour {
   }
 
   ButtonToGarage() {
+    race.quit();   // [web] analytics: QuitTime (only while the race is still on)
     Time.timeScale = 0;
     const lvl = LVL(), S = SS();
     if (lvl) {

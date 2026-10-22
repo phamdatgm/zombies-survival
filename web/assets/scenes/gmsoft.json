@@ -1,0 +1,5 @@
+{"name": "gmsoft", "nodes": [
+{"i": 0, "type": "GameObject", "name": "GmSoft", "active": 1, "layer": 0, "tag": "Untagged", "comps": ["#1", "#2"]},
+{"i": 1, "type": "Transform", "go": "#0", "p": [0, 0, 0], "r": [0, 0, 0, 1], "s": [1, 1, 1], "parent": null, "children": []},
+{"i": 2, "type": "MonoBehaviour", "go": "#0", "script": "GMSDK", "props": {"m_Enabled": 1, "targetScene": "garage"}}
+], "lightmaps": []}

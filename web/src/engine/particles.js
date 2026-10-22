@@ -79,6 +79,30 @@ void main(){ vec2 uv = gl_PointCoord - 0.5; float c = cos(vRot), s = sin(vRot); 
  #include <fog_fragment>
 }`;
 
+// Stretched Billboard (render mode 1): camera-facing quad stretched along the particle velocity. The head sits on the
+// particle position and the tail trails behind it; length = size * lengthScale + speed * velocityScale.
+const SVS = `
+attribute vec3 pdir; attribute vec2 corner; attribute float psize; attribute float plen; attribute vec4 pcolor;
+varying vec4 vColor; varying vec2 vUv;
+#include <fog_pars_vertex>
+void main(){ vColor = pcolor; vUv = vec2(corner.x + 0.5, corner.y + 1.0);
+ vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+ vec3 toCam = normalize(-mvPosition.xyz); vec3 d = (modelViewMatrix * vec4(pdir, 0.0)).xyz;
+ d -= toCam * dot(d, toCam); d = length(d) < 1e-6 ? vec3(0.0, 1.0, 0.0) : normalize(d);
+ vec3 side = normalize(cross(d, toCam));
+ mvPosition.xyz += d * (corner.y * plen) + side * (corner.x * psize);
+ gl_Position = projectionMatrix * mvPosition;
+ #include <fog_vertex>
+}`;
+const SFS = `
+uniform sampler2D map; uniform float hasMap; uniform vec4 tint; varying vec4 vColor; varying vec2 vUv;
+#include <fog_pars_fragment>
+void main(){ float f = 1.0 - smoothstep(0.0, 0.5, length(vUv - 0.5)); // no map = Unity Default-Particle: soft radial glow
+ vec4 t = hasMap > 0.5 ? texture2D(map, vUv) : vec4(1.0, 1.0, 1.0, f * f);
+ gl_FragColor = t * vColor * tint; if (gl_FragColor.a < 0.003) discard;
+ #include <fog_fragment>
+}`;
+
 export class ParticleSystem extends Component {
   static typeName = 'ParticleSystem';
   constructor(go, p) {
@@ -134,6 +158,30 @@ export class ParticleSystem extends Component {
       this.mesh = new THREE.InstancedMesh(geo, mat, this.maxParticles);
       this.mesh.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(this.maxParticles * 3), 3);
       this.mesh.count = 0;
+    } else if (this.renderMode === 1) {
+      this.isStretch = true;
+      const n = this.maxParticles, g = new THREE.BufferGeometry();
+      this.posArr = new Float32Array(n * 12); this.dirArr = new Float32Array(n * 12); this.colArr = new Float32Array(n * 16);
+      this.sizeArr = new Float32Array(n * 4); this.lenArr = new Float32Array(n * 4);
+      const corner = new Float32Array(n * 8), idx = new Uint32Array(n * 6);
+      for (let i = 0; i < n; i++) {
+        corner.set([-0.5, -1, 0.5, -1, 0.5, 0, -0.5, 0], i * 8);
+        const b = i * 4; idx.set([b, b + 1, b + 2, b, b + 2, b + 3], i * 6);
+      }
+      g.setAttribute('position', new THREE.BufferAttribute(this.posArr, 3));
+      g.setAttribute('pdir', new THREE.BufferAttribute(this.dirArr, 3));
+      g.setAttribute('pcolor', new THREE.BufferAttribute(this.colArr, 4));
+      g.setAttribute('psize', new THREE.BufferAttribute(this.sizeArr, 1));
+      g.setAttribute('plen', new THREE.BufferAttribute(this.lenArr, 1));
+      g.setAttribute('corner', new THREE.BufferAttribute(corner, 2));
+      g.setIndex(new THREE.BufferAttribute(idx, 1));
+      g.setDrawRange(0, 0);
+      const mat = new THREE.ShaderMaterial({
+        uniforms: { map: { value: map }, hasMap: { value: map ? 1 : 0 }, tint: { value: tint }, ...THREE.UniformsLib.fog },
+        vertexShader: SVS, fragmentShader: SFS, transparent: true, depthWrite: false, fog: true, side: THREE.DoubleSide,
+        blending: additive ? THREE.AdditiveBlending : THREE.NormalBlending,
+      });
+      this.mesh = new THREE.Mesh(g, mat);
     } else {
       const g = new THREE.BufferGeometry();
       this.posArr = new Float32Array(this.maxParticles * 3); this.colArr = new Float32Array(this.maxParticles * 4); this.sizeArr = new Float32Array(this.maxParticles); this.rotArr = new Float32Array(this.maxParticles);
@@ -161,6 +209,11 @@ export class ParticleSystem extends Component {
   get particleCount() { return this.particles.length; }
   Play(withChildren = true) {
     this.playing = true; this.time = -(evalMinMax(this.p.startDelay) || 0); this.emitAcc = 0; this.burstDone.clear();
+    // prewarm: a looping system starts as if it had already run one full cycle
+    if (this.p.prewarm && this.looping && this.duration > 0 && !this.particles.length) {
+      this.time = 0; const step = 1 / 30;
+      for (let t = 0; t < this.duration - 1e-6; t += step) this._step(Math.min(step, this.duration - t), false);
+    }
     if (withChildren) for (const c of this.transform._children) { const ps = c.gameObject.GetComponent(ParticleSystem); if (ps && ps !== this) ps.Play(true); }
   }
   Stop(withChildren = true, behavior = 1) {
@@ -230,8 +283,8 @@ export class ParticleSystem extends Component {
     this.particles.push(pt);
     return pt;
   }
-  Update() {
-    const dt = Time.deltaTime * (this.p.simulationSpeed ?? 1);
+  Update() { this._step(Time.deltaTime * (this.p.simulationSpeed ?? 1), true); }
+  _step(dt, render) {
     if (this.playing) {
       const E = this.p.EmissionModule;
       this.time += dt;
@@ -254,9 +307,9 @@ export class ParticleSystem extends Component {
         if (this.time >= this.duration && !this.looping) this.playing = false;
       }
     }
-    this._simulate(dt);
+    this._simulate(dt, render);
   }
-  _simulate(dt) {
+  _simulate(dt, render = true) {
     const g = -9.81;
     const V = this.p.VelocityModule, Sz = this.p.SizeModule, C = this.p.ColorModule, Rm = this.p.RotationModule, L = this.p.ClampVelocityModule;
     const out = [];
@@ -274,6 +327,7 @@ export class ParticleSystem extends Component {
       out.push(pt);
     }
     this.particles = out;
+    if (!render) return;
     const n = out.length;
     // Local simulation space: particle state is emitter-local, rendered through the emitter's current matrix
     const em = this.simWorld ? null : this._localRenderMatrix(); const wpos = new THREE.Vector3();
@@ -293,6 +347,30 @@ export class ParticleSystem extends Component {
         this.mesh.setColorAt(i, c.setRGB(pt.col[0] * col[0], pt.col[1] * col[1], pt.col[2] * col[2]));
       }
       this.mesh.count = n; this.mesh.instanceMatrix.needsUpdate = true; if (this.mesh.instanceColor) this.mesh.instanceColor.needsUpdate = true;
+    } else if (this.isStretch) {
+      const rp = this.rendererProps, ls = rp.m_LengthScale ?? 2, vs = rp.m_VelocityScale ?? 0;
+      const wd = new THREE.Vector3(), em3 = em || null; let sc = 1;
+      if (em3) { const s3 = new THREE.Vector3(); em3.decompose(new THREE.Vector3(), new THREE.Quaternion(), s3); sc = Math.abs(s3.z) || 1; }
+      for (let i = 0; i < n; i++) {
+        const pt = out[i]; const t = pt.age / pt.life;
+        const wp = P(pt);
+        wd.copy(pt.v); if (em3) wd.transformDirection(em3);
+        const speed = pt.v.length() * sc;
+        if (speed < 1e-6) { wd.set(0, 0, -1); if (em3) wd.transformDirection(em3); } else wd.normalize();
+        const col = C && C.enabled ? evalGradient(C.gradient, t, pt.rnd) : [1, 1, 1, 1];
+        const sz = pt.size * (Sz && Sz.enabled ? sizeOverLife(Sz.curve, t, pt.rnd) : 1);
+        const len = sz * ls + speed * vs;
+        const r = pt.col[0] * col[0], g2 = pt.col[1] * col[1], b = pt.col[2] * col[2], a = pt.col[3] * col[3];
+        for (let k = 0; k < 4; k++) {
+          const v = i * 4 + k;
+          this.posArr[v * 3] = wp.x; this.posArr[v * 3 + 1] = wp.y; this.posArr[v * 3 + 2] = wp.z;
+          this.dirArr[v * 3] = wd.x; this.dirArr[v * 3 + 1] = wd.y; this.dirArr[v * 3 + 2] = wd.z;
+          this.colArr[v * 4] = r; this.colArr[v * 4 + 1] = g2; this.colArr[v * 4 + 2] = b; this.colArr[v * 4 + 3] = a;
+          this.sizeArr[v] = sz; this.lenArr[v] = len;
+        }
+      }
+      const g = this.mesh.geometry; g.setDrawRange(0, n * 6);
+      for (const k of ['position', 'pdir', 'pcolor', 'psize', 'plen']) g.attributes[k].needsUpdate = true;
     } else {
       for (let i = 0; i < n; i++) {
         const pt = out[i]; const t = pt.age / pt.life;

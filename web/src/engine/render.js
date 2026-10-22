@@ -1,7 +1,7 @@
 // Rendering components.
 import * as THREE from 'three';
 import { Component, World } from './core.js';
-import { getGeometrySync, loadGeometry, makeMaterial, getTexture } from './assets.js';
+import { getGeometrySync, loadGeometry, makeMaterial, getTexture, LM } from './assets.js';
 import { Color } from './umath.js';
 
 export const RenderState = { lightmaps: [], renderer: null };
@@ -60,7 +60,11 @@ export class Renderer extends Component {
     const lmTex = this.lightmapIndex >= 0 && this.lightmapIndex < 254 ? RenderState.lightmaps[this.lightmapIndex] : null;
     const hasUv1 = geo && geo.attributes.uv1;
     const hasColor = geo && geo.attributes.color;
-    return this.materialRefs.map((r) => makeMaterial(r, { lightmap: lmTex && hasUv1 ? lmTex : null, lmST: this.lightmapScaleOffset, lmKey: this.lightmapScaleOffset.join(','), skinned, vcolor: hasColor }));
+    // static batching bakes the renderer's lightmap scale/offset into the combined mesh's uv1 (Unity then feeds
+    // unity_LightmapST = (1,1,0,0)); applying it again samples the wrong lightmap texels (garage: 81 renderers)
+    const st = this.sb ? [1, 1, 0, 0] : this.lightmapScaleOffset;
+    const noDirect = LM.dirMask !== -1 && !((LM.dirMask >>> (this.gameObject.layer | 0)) & 1);
+    return this.materialRefs.map((r) => makeMaterial(r, { lightmap: lmTex && hasUv1 ? lmTex : null, lmST: st, lmKey: st.join(','), skinned, vcolor: hasColor, noDirect }));
   }
   // Unity API: renderer.material returns an instance (unique)
   get materials() { return this._mats || []; }

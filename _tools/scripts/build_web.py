@@ -84,10 +84,15 @@ BUILTIN_MESH = {10202: 'Cube', 10206: 'Cylinder', 10207: 'Sphere', 10208: 'Capsu
 
 # ---------------------------------------------------------------- unity yaml
 DOC_RE = re.compile(r'^--- !u!(\d+) &(-?\d+)( stripped)?\s*$', re.M)
+# Unity writes int[]/enum[] fields as little-endian hex blobs. A blob made only of digits would be read by YAML 1.1
+# as an int (octal when it starts with 0, e.g. BigMonsterTruck HOFKAPIGLGA '0000000005000000...' -> intro car had
+# no gun), so digit-only scalars that cannot be a real Unity int (leading zero, or longer than int64) stay strings.
+HEX_DIGITS_RE = re.compile(r'^(\s*(?:- )?\w+: )(0\d+|\d{20,})[ \t]*$', re.M)
 
 def load_unity_yaml(path):
     with open(path, encoding='utf-8', errors='replace') as f:
         txt = f.read()
+    txt = HEX_DIGITS_RE.sub(r"\1'\2'", txt)
     docs = []
     heads = list(DOC_RE.finditer(txt))
     for i, h in enumerate(heads):
@@ -267,6 +272,18 @@ def build_meshes(out_dir):
 def safe(key):
     return re.sub(r'[^A-Za-z0-9_\-]', '_', key)
 
+def fix_weights(w):
+    """Compressed-mesh bone weights (31 steps) decode with a broken implied last weight: UnityPy gives
+    1 - (sum of the 0..31 ints) instead of 1 - (sum of the weights), e.g. 15/31, 15/31, 0, -29 (crow mesh).
+    Rebuild the last weight from the others, then normalise so the weights always sum to 1."""
+    w = [float(x) for x in w] + [0.0] * (4 - len(w))
+    if w[3] < 0 or w[3] > 1:
+        w[3] = max(0.0, 1.0 - sum(w[:3]))
+    w = [max(0.0, x) for x in w]
+    s = sum(w)
+    return tuple(x / s for x in w) if s > 0 else (1.0, 0.0, 0.0, 0.0)
+
+
 def write_mesh(mesh, MeshHandler, path):
     h = MeshHandler(mesh)
     h.process()
@@ -304,7 +321,7 @@ def write_mesh(mesh, MeshHandler, path):
         cols = h.m_Colors
         add('color', [tuple(c[:4]) for c in cols], 4)
     if h.m_BoneWeights and h.m_BoneIndices:
-        add('skinWeight', [tuple(w[:4]) for w in h.m_BoneWeights], 4)
+        add('skinWeight', [fix_weights(w[:4]) for w in h.m_BoneWeights], 4)
         add('skinIndex', [tuple(int(i) for i in b[:4]) for b in h.m_BoneIndices], 4, 'H')
     # indices per submesh; reverse winding
     idx = list(h.m_IndexBuffer)

@@ -1,0 +1,18 @@
+# Zombie Derby UI tracker — one line per screen. Columns are separated by 2+ spaces.
+# Status: [ ] todo  [~] in progress  [x] done  [-] dropped / keep as is  [?] needs a decision
+# status  NN  name  kind  scene  original object(s)
+[ ] 01  Loading  Màn hình  web (index.html)  #gmLoader
+[ ] 02  Home  Màn hình  garage  main_menu, main_menu_bg
+[ ] 03  Garage  Màn hình  garage  garage, top_panel
+[ ] 04  Map  Màn hình  garage  map, top_panel
+[ ] 05  Settings  Popup  garage  settings
+[ ] 06  Achievements  Màn hình  garage  achievements, top_panel
+[ ] 07  Encyclopedia  Popup  garage  encyclopedia
+[ ] 08  Shop  Popup  garage  donate
+[ ] 09  Popup xác nhận / thông báo  Popup  garage  buy_item, no_money, star_hints, hp_low, hp_info, fuel_full
+[ ] 10  Story & Tutorial  Popup  garage + gameplay  story, garage_tutorial, garage_tutorial_2, garage_tutorial_3, tutorial, tutorial_crash
+[ ] 11  HUD  HUD  gameplay  gameplay, splash_label_*, encyclopedia_arrow
+[ ] 12  Pause  Popup  gameplay  pause
+[ ] 13  Revive  Popup  gameplay  revive
+[ ] 14  Discovery Reward  Popup  gameplay  encyclopedia_item
+[ ] 15  Results  Màn hình  gameplay  results, results_hints, splash_label_results

@@ -25,7 +25,7 @@ export const App = {
   },
   start() {
     if (this.running) return; this.running = true; this.last = performance.now();
-    const loop = (now) => { requestAnimationFrame(loop); this.frame(now); };
+    const loop = (now) => { if (globalThis.__gmHalt) return; requestAnimationFrame(loop); this.frame(now); };   // __gmHalt: src/notice.js
     requestAnimationFrame(loop);
   },
   frame(now) {

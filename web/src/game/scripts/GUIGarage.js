@@ -16,6 +16,8 @@ import { GameBehaviour, alive, define } from '../base.js';
 import { G } from '../G.js';
 import { Lang } from '../util.js';
 import { E } from '../enums.js';
+import { NOTICE, APP_VERSION, noticeOk, halt } from '../../notice.js';
+import { openMoreGames, moreGamesAllowed, moreGamesSprite } from '../moreGames.js';
 
 // ---------------------------------------------------------------- web platform constants
 // BridgePHP.sn (platform) -> NONE on web: hides every platform/online specific button.
@@ -194,7 +196,7 @@ export class GUIGarage extends GameBehaviour {
   webHideRemoved() {
     this.HGHFFNAJALJ();                         // social_vk / social_fb / social_twitter
     setActive(this.KLHBEPGKIKD, false);         // social_vk
-    setActive(this.IIAMMNMHEFE, false);         // zd2_promo_button
+    this.webMoreGames();                        // zd2_promo_button -> More Games
     setActive(this.BCDIGJJNKFP, false);         // rating_button (online leaderboard)
     setActive(this.EILOJNEBFLD, false);         // button_achievements_gpgs
     setActive(this.LGDFJPCENPE, false);         // special_offer_button (IAP)
@@ -393,8 +395,9 @@ export class GUIGarage extends GameBehaviour {
       r.anchoredPosition = [0, -140]; r.sizeDelta = [1500, 320];
       label.alignment = 4; // middle center
       label.fontSize = 72;
-      label.text = 'V1.0\n© 2026 Azgames.io';
+      label.text = `${APP_VERSION}\n${NOTICE}`;   // version + copyright (src/config.mjs, locked by src/notice.js)
       setActive(label, true);
+      if (!noticeOk(NOTICE)) halt();
     }
     uiDirty();
   }
@@ -1251,7 +1254,16 @@ export class GUIGarage extends GameBehaviour {
   ButtonGoToAppStore() { /* [removed: store] */ }
   ButtonGoToGooglePlay() { /* [removed: store] */ }
   ButtonZD2GoToStore() { /* [removed: store] */ }
-  ButtonZD2Adv() { /* ZD2 promo window  [removed: store] (button hidden) */ }
+  ButtonZD2Adv() { openMoreGames(); }   // ZD2 promo window [removed: store] -> [web] More Games (portal SDK)
+  // [web] main menu: the ZD2 promo slot (next to settings / achievements) becomes the More Games button
+  webMoreGames() {
+    const btn = goOf(this.IIAMMNMHEFE); if (!alive(btn)) return;
+    setActive(btn, moreGamesAllowed());
+    const img = btn.GetComponent(Image);
+    if (img) { img.sprite = moreGamesSprite(); img.color = { r: 1, g: 1, b: 1, a: 1 }; }
+    const gif = btn.transform._children.find((c) => c.gameObject.name === 'zd2_promo_gif');
+    if (gif) setActive(gif.gameObject, false);
+  }
   ButtonRating() { /* RatingController (online leaderboard)  [removed: online] (button hidden) */ }
   ButtonNOWGGLoginAgain() { /* [removed: online] */ }
   ButtonRateMeNow() { const p = prof(); if (p) p.DCLEGMOJBPN(-1); this.ButtonCloseWindow(); } // store URL [removed]

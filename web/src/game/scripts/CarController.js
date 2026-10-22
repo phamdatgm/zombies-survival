@@ -13,6 +13,7 @@ import { GameBehaviour, alive, define, FindObjectOfType, FindObjectsOfType } fro
 import { materialUniforms } from '../../engine/assets.js';
 import { G } from '../G.js';
 import { T } from '../util.js';
+import { race } from '../analytics.js';
 
 // ------------------------------------------------------------------ small helpers
 const roundEven = (v) => { const f = Math.floor(v), d = v - f; if (d > 0.5) return f + 1; if (d < 0.5) return f; return (f % 2 === 0) ? f : f + 1; }; // C# Math.Round
@@ -962,6 +963,7 @@ export class CarController extends GameBehaviour {
       this._finishStart();
       return;
     }
+    race.start(G.Main && G.Main.NMDEEOMHAGP ? G.Main.NMDEEOMHAGP.id : -1);   // [web] analytics: PlayGame (also on restart)
     this.ECBLNBNGONF = G.CarCamera ? FindObjectOfType(G.CarCamera) : null;
     if (alive(this.ECBLNBNGONF)) this.ECBLNBNGONF.PEEMAHNEIHI = this;
     this.NCMHCOHPOOB = G.MoveBackground ? FindObjectOfType(G.MoveBackground) : null;
@@ -1405,6 +1407,7 @@ export class CarController extends GameBehaviour {
     this.KIGCLEFNGIH('EMKMCEPMMBG', 'points', 0, 5000);
     this.KIGCLEFNGIH('NFDOKGHMLFP', 'silver', 0, 30000);
     C.LNNMJCIFMGH = _is_finished;
+    race.end(_is_finished, this.EMKMCEPMMBG | 0);   // [web] analytics: CompleteGame / EndGame
     this.FPHFKCCPAEF = 0;
     completed_stars = 0; is_show_stamp_record = false;
     this.HHDCACBMPJK = 0;

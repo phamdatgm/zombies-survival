@@ -1,4 +1,4 @@
-"""Export Assembly-CSharp field names/types/offsets -> web/src/game/fieldtypes.json
+"""Export Assembly-CSharp field names/types/offsets -> web/StreamingAssets/data/fieldtypes.json
 { "Class": { "inst": {"FIELD": "Type"}, "static": {...}, "consts": {"NAME": "value"} } }
 Usage: python -I build_fieldtypes.py <by_assembly/Assembly-CSharp.cs> <out.json>
 """

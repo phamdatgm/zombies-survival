@@ -337,9 +337,16 @@ export class Image extends Graphic {
     if (this.fillMethod === 0) st.clipPath = this.fillOrigin === 1 ? `inset(0 0 0 ${100 - f}%)` : `inset(0 ${100 - f}% 0 0)`;
     else if (this.fillMethod === 1) st.clipPath = this.fillOrigin === 1 ? `inset(0 0 ${100 - f}% 0)` : `inset(${100 - f}% 0 0 0)`;
     else {
-      // radial: approximate with conic polygon
-      const n = 24; const pts = ['50% 50%']; const start = -Math.PI / 2; const total = this._fillAmount * Math.PI * 2 * (this.fillMethod === 2 ? 0.25 : this.fillMethod === 3 ? 0.5 : 1);
-      for (let i = 0; i <= n; i++) { const a = start + (this.fillClockwise ? 1 : -1) * total * i / n; pts.push(`${50 + 75 * Math.cos(a)}% ${50 + 75 * Math.sin(a)}%`); }
+      // radial: approximate with conic polygon. Angles in CSS space (y down, increasing = clockwise on screen).
+      // Unity origins: Radial90 BottomLeft/TopLeft/TopRight/BottomRight, Radial180 Bottom/Left/Top/Right,
+      // Radial360 Bottom/Right/Top/Left. Radial90/180 sweep their quadrant/half from q0 (clockwise) or from its far end (counter-clockwise).
+      const P = Math.PI, o = this.fillOrigin & 3, cw = this.fillClockwise;
+      let cx = 50, cy = 50, start, span;
+      if (this.fillMethod === 2) { [cx, cy] = [[0, 100], [0, 0], [100, 0], [100, 100]][o]; span = P / 2; start = [-P / 2, 0, P / 2, P][o] + (cw ? 0 : span); }
+      else if (this.fillMethod === 3) { [cx, cy] = [[50, 100], [0, 50], [50, 0], [100, 50]][o]; span = P; start = [P, -P / 2, 0, P / 2][o] + (cw ? 0 : span); }
+      else { span = 2 * P; start = [P / 2, 0, -P / 2, P][o]; }
+      const n = 32; const pts = [`${cx}% ${cy}%`]; const total = this._fillAmount * span;
+      for (let i = 0; i <= n; i++) { const a = start + (cw ? 1 : -1) * total * i / n; pts.push(`${cx + 150 * Math.cos(a)}% ${cy + 150 * Math.sin(a)}%`); }
       st.clipPath = `polygon(${pts.join(',')})`;
     }
   }
@@ -538,6 +545,65 @@ export class Slider extends Selectable {
   _drag(e) { const r = this.el.getBoundingClientRect(); const t = Mathf.Clamp01((e.clientX - r.left) / r.width); this.value = this.minValue + t * (this.maxValue - this.minValue); }
 }
 
+// Unity Scrollbar: drives the handle's anchors from value/size (UpdateVisuals); pressing beside the handle pages
+// toward the pointer (ClickRepeat), dragging moves the handle (UpdateDrag). Direction: 0 LeftToRight, 1 RightToLeft,
+// 2 BottomToTop, 3 TopToBottom
+export class Scrollbar extends Selectable {
+  static typeName = 'Scrollbar';
+  constructor(go, p) {
+    super(go, p);
+    this._value = Mathf.Clamp01(p.m_Value ?? 0); this._size = Mathf.Clamp01(p.m_Size ?? 0.2); this.direction = p.m_Direction || 0; this.numberOfSteps = p.m_NumberOfSteps || 0; this.handleRectRef = p.m_HandleRect;
+    this.onValueChanged = new UnityEvent(p.m_OnValueChanged && p.m_OnValueChanged.m_PersistentCalls && p.m_OnValueChanged.m_PersistentCalls.m_Calls, null);
+  }
+  onDeserialize() { this.onValueChanged.inst = this._inst; }
+  Awake() { this._apply(); }
+  get handleRect() { return this.ref(this.handleRectRef); }
+  get _axis() { return this.direction >= 2 ? 1 : 0; }
+  get _reverse() { return this.direction === 1 || this.direction === 3; }
+  get value() { const n = this.numberOfSteps; return n > 1 ? Math.round(this._value * (n - 1)) / (n - 1) : this._value; }
+  set value(v) { this._set(v, true); }
+  SetValueWithoutNotify(v) { this._set(v, false); }
+  get size() { return this._size; } set size(s) { s = Mathf.Clamp01(s); if (s === this._size) return; this._size = s; this._apply(); }
+  _set(v, notify) { const prev = this.value; this._value = Mathf.Clamp01(v); if (prev === this.value) return; this._apply(); if (notify) this.onValueChanged.Invoke(this.value); }
+  _apply() {
+    const h = this.handleRect; const r = h && h.gameObject && h.gameObject.rect; if (!r) return;
+    const a = this._axis, mv = this.value * (1 - this._size); const mn = [0, 0], mx = [1, 1];
+    if (this._reverse) { mn[a] = 1 - mv - this._size; mx[a] = 1 - mv; } else { mn[a] = mv; mx[a] = mv + this._size; }
+    if (r.anchorMin[0] === mn[0] && r.anchorMin[1] === mn[1] && r.anchorMax[0] === mx[0] && r.anchorMax[1] === mx[1]) return;
+    r.anchorMin = mn; r.anchorMax = mx; uiDirty();
+  }
+  _buildDom() { super._buildDom(); this.el.addEventListener('pointerdown', (e) => { e._zdScrollbar = true; }); }
+  _hEl() { const h = this.handleRect; return h && h.gameObject && h.gameObject._el; }
+  _inHandle(x, y) { const el = this._hEl(); if (!el) return false; const b = el.getBoundingClientRect(); return x >= b.left && x <= b.right && y >= b.top && y <= b.bottom; }
+  _step(x, y) { // ClickRepeat: one page (size) toward the pointer
+    const el = this._hEl(); if (!el) return; const b = el.getBoundingClientRect();
+    const neg = this._axis ? y > (b.top + b.bottom) / 2 : x < (b.left + b.right) / 2; const ch = neg ? this._size : -this._size;
+    this.value = Math.round(Mathf.Clamp01(this._value + (this._reverse ? ch : -ch)) * 10000) / 10000;
+  }
+  _dragTo(x, y, off) { // UpdateDrag: handle centre follows the cursor (minus the grab offset) inside the sliding area
+    const h = this.handleRect; const p = h && h.gameObject.transform._parent; const cel = p && p.gameObject._el; if (!cel) return;
+    const c = cel.getBoundingClientRect(); const len = this._axis ? c.height : c.width; const rem = len * (1 - this._size); if (rem <= 0) return;
+    const cur = this._axis ? c.bottom - y : x - c.left; const t = (cur - off - len * this._size / 2) / rem;
+    this.value = this._reverse ? 1 - t : t;
+  }
+  onDown(e) {
+    if (e.button) return;
+    const sx = e.clientX, sy = e.clientY; let px = sx, py = sy, dragging = false, off = 0, alive = true;
+    const repeat = () => { if (!alive || dragging) return; if (!this._inHandle(px, py)) this._step(px, py); requestAnimationFrame(repeat); };
+    if (!this._inHandle(sx, sy)) repeat();
+    const mv = (m) => {
+      px = m.clientX; py = m.clientY;
+      if (!dragging && Math.hypot(px - sx, py - sy) > 10) {
+        dragging = true; off = 0;
+        if (this._inHandle(sx, sy)) { const b = this._hEl().getBoundingClientRect(); off = this._axis ? (b.top + b.bottom) / 2 - sy : sx - (b.left + b.right) / 2; }
+      }
+      if (dragging) this._dragTo(px, py, off);
+    };
+    const up = () => { alive = false; removeEventListener('pointermove', mv); removeEventListener('pointerup', up); removeEventListener('pointercancel', up); };
+    addEventListener('pointermove', mv); addEventListener('pointerup', up); addEventListener('pointercancel', up);
+  }
+}
+
 // EventTrigger: eventID (PointerEnter=0, PointerExit=1, PointerDown=2, PointerUp=3, PointerClick=4)
 export class EventTrigger extends Component {
   static typeName = 'EventTrigger';
@@ -673,13 +739,68 @@ export class ScrollRect extends Component {
     const el = ensureEl(this.gameObject); el.classList.add('ug-hit');
     const content = this.ref(this.props.m_Content); const horiz = !!this.props.m_Horizontal, vert = !!this.props.m_Vertical;
     let down = false, lx = 0, ly = 0;
-    el.addEventListener('pointerdown', (e) => { down = true; lx = e.clientX; ly = e.clientY; });
+    // a press on a child Scrollbar drags the scrollbar (Unity: the Scrollbar takes the drag), not the content
+    el.addEventListener('pointerdown', (e) => { if (e._zdScrollbar) return; down = true; lx = e.clientX; ly = e.clientY; });
     addEventListener('pointerup', () => { down = false; });
     addEventListener('pointermove', (e) => {
       if (!down || !content) return; const cv = canvasOf(this.gameObject); const k = cv ? cv.scale : 1;
-      const r = content.gameObject.rect; if (horiz) r.anchoredPosition[0] += (e.clientX - lx) / k; if (vert) r.anchoredPosition[1] -= (e.clientY - ly) / k; lx = e.clientX; ly = e.clientY; this._clamp(); uiDirty();
+      const r = content.gameObject.rect; if (horiz) r.anchoredPosition[0] += (e.clientX - lx) / k; if (vert) r.anchoredPosition[1] -= (e.clientY - ly) / k; lx = e.clientX; ly = e.clientY; this._clamp(); this._updateScrollbars(); uiDirty();
     });
-    el.addEventListener('wheel', (e) => { if (!content) return; const r = content.gameObject.rect; if (vert) r.anchoredPosition[1] += e.deltaY; else if (horiz) r.anchoredPosition[0] -= e.deltaY; this._clamp(); uiDirty(); });
+    el.addEventListener('wheel', (e) => {
+      if (!content) return; const r = content.gameObject.rect;
+      const k = e.deltaMode === 1 ? 33 : e.deltaMode === 2 ? 300 : 1; const d = (Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX) * k;
+      if (vert) r.anchoredPosition[1] += d; else if (horiz) r.anchoredPosition[0] -= d; this._clamp(); this._updateScrollbars(); uiDirty();
+    });
+  }
+  // Unity ScrollRect.LateUpdate -> UpdateScrollbars / UpdateScrollbarVisibility: the bound scrollbars follow the content
+  // (handle size = view/content, value = normalized position); dragging a scrollbar scrolls the content back
+  LateUpdate() { this._updateScrollbars(); }
+  _bars() {
+    if (!this._barsWired) {
+      this._barsWired = true;
+      const h = this.ref(this.props.m_HorizontalScrollbar), v = this.ref(this.props.m_VerticalScrollbar);
+      this._hBar = h instanceof Scrollbar ? h : null; this._vBar = v instanceof Scrollbar ? v : null;
+      if (this._hBar) this._hBar.onValueChanged.AddListener((x) => { if (!this._syncing) this.horizontalNormalizedPosition = x; });
+      if (this._vBar) this._vBar.onValueChanged.AddListener((x) => { if (!this._syncing) this.verticalNormalizedPosition = x; });
+    }
+    return this._hBar || this._vBar;
+  }
+  _geom(axis) {
+    // content bounds relative to the viewport (content is the viewport's child): min edge, content size, view size
+    const content = this.ref(this.props.m_Content); if (!content || !content.gameObject.rect) return null;
+    const vp = this.ref(this.props.m_Viewport) || this.transform;
+    const r = content.gameObject.rect; const cs = rectSize(content.gameObject), vs = rectSize(vp.gameObject);
+    const p = content.gameObject.transform._parent; const ps = p && p.gameObject.rect ? rectSize(p.gameObject) : vs;
+    return { min: r.anchorMin[axis] * ps[axis] + r.anchoredPosition[axis] - r.sizeDelta[axis] * r.pivot[axis], cs: cs[axis], vs: vs[axis], r };
+  }
+  _normalized(axis) {
+    const g = this._geom(axis); if (!g) return 0;
+    if (g.cs <= g.vs + 1e-4) return g.min < 0 ? 1 : 0;
+    return -g.min / (g.cs - g.vs);
+  }
+  _setNormalized(axis, v) {
+    const g = this._geom(axis); if (!g) return; const hidden = g.cs - g.vs; if (hidden <= 0) return;
+    g.r.anchoredPosition[axis] += -Mathf.Clamp01(v) * hidden - g.min; uiDirty();
+  }
+  _updateScrollbars() {
+    if (!this._bars()) return;
+    this._syncing = true;
+    try {
+      for (const [bar, axis, vis, sp] of [[this._hBar, 0, this.props.m_HorizontalScrollbarVisibility, this.props.m_HorizontalScrollbarSpacing], [this._vBar, 1, this.props.m_VerticalScrollbarVisibility, this.props.m_VerticalScrollbarSpacing]]) {
+        if (!bar) continue; const g = this._geom(axis); if (!g) continue;
+        if (vis) { // AutoHide (1) / AutoHideAndExpandViewport (2)
+          const needed = g.cs > g.vs + 0.01; const bgo = bar.gameObject;
+          if (bgo.activeSelf !== needed) bgo.SetActive(needed);
+          const vp = this.ref(this.props.m_Viewport);
+          if (vis === 2 && vp && vp.gameObject.rect && vp.gameObject.transform._parent === this.transform) {
+            const o = 1 - axis; const sd = vp.gameObject.rect.sizeDelta; const want = needed ? -(rectSize(bgo)[o] + (sp || 0)) : 0;
+            if (Math.abs(sd[o] - want) > 1e-3) { sd[o] = want; uiDirty(); }
+          }
+        }
+        bar.size = g.cs > 0 ? Mathf.Clamp01(g.vs / g.cs) : 1;
+        bar.value = this._normalized(axis);
+      }
+    } finally { this._syncing = false; }
   }
   _clamp() {
     const content = this.ref(this.props.m_Content); if (!content) return; const vp = this.ref(this.props.m_Viewport) || this.transform;
@@ -687,9 +808,14 @@ export class ScrollRect extends Component {
     if (this.props.m_Vertical) r.anchoredPosition[1] = Mathf.Clamp(r.anchoredPosition[1], 0, Math.max(0, cs[1] - vs[1]));
     if (this.props.m_Horizontal) r.anchoredPosition[0] = Mathf.Clamp(r.anchoredPosition[0], -Math.max(0, cs[0] - vs[0]), 0);
   }
-  get normalizedPosition() { return new Vector2(0, 0); }
-  set verticalNormalizedPosition(v) { const content = this.ref(this.props.m_Content); if (!content) return; const vp = this.ref(this.props.m_Viewport) || this.transform; const cs = rectSize(content.gameObject), vs = rectSize(vp.gameObject); content.gameObject.rect.anchoredPosition[1] = (1 - v) * Math.max(0, cs[1] - vs[1]); uiDirty(); }
-  set horizontalNormalizedPosition(v) { const content = this.ref(this.props.m_Content); if (!content) return; const vp = this.ref(this.props.m_Viewport) || this.transform; const cs = rectSize(content.gameObject), vs = rectSize(vp.gameObject); content.gameObject.rect.anchoredPosition[0] = -v * Math.max(0, cs[0] - vs[0]); uiDirty(); }
+  get normalizedPosition() { return new Vector2(this._normalized(0), this._normalized(1)); }
+  set normalizedPosition(v) { this._setNormalized(0, v.x); this._setNormalized(1, v.y); }
+  get verticalNormalizedPosition() { return this._normalized(1); }
+  set verticalNormalizedPosition(v) { this._setNormalized(1, v); }
+  get horizontalNormalizedPosition() { return this._normalized(0); }
+  set horizontalNormalizedPosition(v) { this._setNormalized(0, v); }
+  get horizontalScrollbar() { this._bars(); return this._hBar; }
+  get verticalScrollbar() { this._bars(); return this._vBar; }
   StopMovement() { }
   get content() { return this.ref(this.props.m_Content); }
 }
@@ -698,4 +824,4 @@ export class StandaloneInputModule extends Component { static typeName = 'Standa
 export class CanvasRenderer extends Component { static typeName = 'CanvasRenderer'; SetAlpha(a) { const el = this.gameObject._el; if (el) el.style.opacity = a; } GetAlpha() { return 1; } }
 
 export const UGUI_COMPONENTS_LIST = 0;
-export const UGUI_COMPONENTS = { Canvas, CanvasScaler, GraphicRaycaster, CanvasGroup, Image, RawImage, Text, Shadow, Outline, Button, Toggle, Slider, EventTrigger, LayoutElement, HorizontalLayoutGroup, VerticalLayoutGroup, GridLayoutGroup, ContentSizeFitter, Mask, RectMask2D, ScrollRect, EventSystem, StandaloneInputModule, CanvasRenderer };
+export const UGUI_COMPONENTS = { Canvas, CanvasScaler, GraphicRaycaster, CanvasGroup, Image, RawImage, Text, Shadow, Outline, Button, Toggle, Slider, EventTrigger, LayoutElement, HorizontalLayoutGroup, VerticalLayoutGroup, GridLayoutGroup, ContentSizeFitter, Mask, RectMask2D, ScrollRect, Scrollbar, EventSystem, StandaloneInputModule, CanvasRenderer };

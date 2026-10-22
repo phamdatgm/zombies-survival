@@ -19,7 +19,7 @@ function bindingMap(rootGo) {
   return map;
 }
 
-const _e = new THREE.Euler(), _qq = new THREE.Quaternion();
+const _e = new THREE.Euler(), _qq = new THREE.Quaternion(), _mExp = new THREE.Matrix4();
 
 export function sampleClip(clip, t, bind, weight = 1) {
   const n = clip.n; const f = Math.min(Math.max(t * clip.fps, 0), n - 1);
@@ -197,6 +197,12 @@ export class Animator extends Component {
         go._activeInHierarchy = parent._activeInHierarchy; go._active = true; go.obj.visible = go._activeInHierarchy; go._generatedBone = true;
       }
       created[i] = go; this.skeleton.set(n.h >>> 0, go);
+      // "Optimize Game Objects" exposed transform: a bone kept as a flat child of the Animator root (e.g. Hand_Right_jnt
+      // holding a shield/torch). Unity writes the bone's root-relative pose into it every frame (see _syncExposed).
+      if (!ex && parent !== this.gameObject) {
+        const exp = this.gameObject.transform._children.find((c) => c.gameObject.name === name && !c.gameObject._generatedBone);
+        if (exp) (this.exposed || (this.exposed = [])).push([go, exp.gameObject]);
+      }
     });
     for (const r of this.gameObject.GetComponentsInChildren('SkinnedMeshRenderer', true)) if (!r.boneRefs.length) r._rebuild();
   }
@@ -283,8 +289,17 @@ export class Animator extends Component {
         }
       }
       this._lastT = t;
+      if (this.exposed) this._syncExposed();
     }
     this._eval();
+  }
+  _syncExposed() {
+    const root = this.gameObject.obj;
+    for (const [bone, exp] of this.exposed) {
+      const m = _mExp.identity();
+      for (let o = bone.obj; o && o !== root; o = o.parent) { o.updateMatrix(); m.premultiply(o.matrix); }
+      m.decompose(exp.obj.position, exp.obj.quaternion, exp.obj.scale);
+    }
   }
   _events(c, t0, t1) {
     for (const e of c.events) {

@@ -35,6 +35,7 @@ import './FinishAnimator.js';
 import './FPSCounter.js';
 import './FuelManager.js';
 import './GFXDisabler.js';
+import './GMSDK.js';
 import './GUIAchievement.js';
 import './GUICoins.js';
 import './GUIEmptyElement.js';

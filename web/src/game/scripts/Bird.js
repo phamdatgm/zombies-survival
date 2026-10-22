@@ -22,14 +22,14 @@ export class Bird extends GameBehaviour {
     const car = G.CarController && G.CarController.KECGFPHIEHF;
     if (alive(car)) {
       const carT = car.BHDKJIINJNL;
-      const carZ = carT.position.z;
-      const src = carZ <= this.LIEHBGFFHFF.position.z ? this.LIEHBGFFHFF : carT; // the one further ahead
-      const z = src.position.z;
+      // ARM64 (libil2cpp 0xb01490): the binary compares car z with bird z and reads the "further ahead" transform,
+      // but that result is dead — it re-reads the CAR position right before set_position. Net effect:
+      // position = (0, startHeight + h, carZ + offset): the crow always flies over the car, pulling ahead while the car is slow.
       const t = this.CNAGLGLEJMC;
       let h = 0;
       if (t < 1.1) h = Mathf.Lerp(4, 0, t);
       if (7.0 < t) h = Mathf.Lerp(0, 15, (t - 7.0) * 0.5);
-      this.LIEHBGFFHFF.position = new Vector3(carT.position.x, h + this.KLFJONLGKDH, z + this.KCCOCHHHOMB);
+      this.LIEHBGFFHFF.position = new Vector3(0, h + this.KLFJONLGKDH, carT.position.z + this.KCCOCHHHOMB);
       if (car.AGKGCILIANE() < 10.0) this.KCCOCHHHOMB += Time.deltaTime + Time.deltaTime;
     }
     this.CNAGLGLEJMC += Time.deltaTime;

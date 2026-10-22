@@ -71,7 +71,7 @@ python -I _tools/scripts/fix_scene_meshes.py unity_project/ExportedProject _raw/
 python -I _tools/scripts/build_sprites.py unity_project/ExportedProject web/assets
 python -I _tools/scripts/build_avatars.py unity_project/ExportedProject web/assets
 python -I _tools/scripts/build_texts.py _raw/base/assets/bin/Data/data.unity3d web/assets
-python -I _tools/scripts/build_fieldtypes.py dump/il2cpp/by_assembly/Assembly-CSharp.cs web/src/game/fieldtypes.json
+python -I _tools/scripts/build_fieldtypes.py dump/il2cpp/by_assembly/Assembly-CSharp.cs web/StreamingAssets/data/fieldtypes.json
 node _tools/scripts/gen_scripts_index.mjs web/src/game/scripts
 ```
 Cần Python 3 + `pip install UnityPy pyyaml`.

@@ -1,5 +1,6 @@
 // Asset database: loads the converted index and builds three.js resources lazily.
 import * as THREE from 'three';
+import { fetchRetry } from '../sdk/net.js';
 
 const BASE = 'assets/';
 export const DB = { index: null, sprites: null, texts: null };
@@ -8,10 +9,10 @@ const texLoader = new THREE.TextureLoader();
 
 export async function loadIndex() {
   const [index, sprites, texts, avatars] = await Promise.all([
-    fetch(BASE + 'index.json').then((r) => r.json()),
-    fetch(BASE + 'sprites.json').then((r) => r.json()),
-    fetch(BASE + 'texts.json').then((r) => r.json()),
-    fetch(BASE + 'avatars.json').then((r) => r.json()),
+    fetchRetry(BASE + 'index.json').then((r) => r.json()),
+    fetchRetry(BASE + 'sprites.json').then((r) => r.json()),
+    fetchRetry(BASE + 'texts.json').then((r) => r.json()),
+    fetchRetry(BASE + 'avatars.json').then((r) => r.json()),
   ]);
   DB.index = index; DB.sprites = sprites; DB.texts = texts; DB.avatars = avatars;
   // name lookups for Resources.Load
@@ -28,7 +29,7 @@ export async function loadIndex() {
 export function assetUrl(file) { return BASE + file; }
 
 export async function loadJSON(file) {
-  if (!cache.json.has(file)) cache.json.set(file, fetch(BASE + file).then((r) => r.json()));
+  if (!cache.json.has(file)) cache.json.set(file, fetchRetry(BASE + file).then((r) => r.json()).catch((e) => { cache.json.delete(file); throw e; }));
   return cache.json.get(file);
 }
 
@@ -46,7 +47,7 @@ export async function loadGeometry(ref) {
   const p = (async () => {
     const e = DB.index.meshes[key];
     if (!e) return builtinGeometry(ref);
-    const buf = await fetch(BASE + 'mesh/' + e.file).then((r) => r.arrayBuffer());
+    const buf = await fetchRetry(BASE + 'mesh/' + e.file).then((r) => r.arrayBuffer());
     const g = new THREE.BufferGeometry();
     for (const [name, [off, comps, fmt]] of Object.entries(e.attrs)) {
       let arr;
@@ -118,7 +119,7 @@ export function getMaterialDef(ref) {
 
 export function makeMaterial(ref, opts = {}) {
   const def = getMaterialDef(ref);
-  const ckey = (ref || 'none') + '|' + (opts.lightmap ? opts.lightmap.uuid + opts.lmKey : '') + (opts.skinned ? '|s' : '') + (opts.vcolor ? '|v' : '');
+  const ckey = (ref || 'none') + '|' + (opts.lightmap ? opts.lightmap.uuid + opts.lmKey : '') + (opts.skinned ? '|s' : '') + (opts.vcolor ? '|v' : '') + (opts.noDirect ? '|nd' : '');
   if (!opts.unique && cache.mat.has(ckey)) return cache.mat.get(ckey);
   let m;
   const shader = def ? def.shader : 'Standard';
@@ -132,7 +133,8 @@ export function makeMaterial(ref, opts = {}) {
   const s = shader.toLowerCase();
   const additive = /additive|builtin:10720/.test(s) || /flarespark|additive/.test(def ? def.name : '');
   const alphaBlend = /alpha blended|transparent|builtin:10721|sprite|ui\/|particles\/standard unlit/.test(s);
-  const unlit = /unlit|particles|builtin:107(20|21)|sprite|ui\/|matcap|disable fog/.test(s);
+  // builtin:10755 = Unlit/Color in the shipped build (Light.mat: garage string-light bulbs)
+  const unlit = /unlit|particles|builtin:107(20|21|55)|sprite|ui\/|matcap|disable fog/.test(s);
   const params = { map, color, vertexColors: !!opts.vcolor && /vertex|particle/.test(s) };
   if (additive) {
     if (s.includes('legacy') && col) color.multiplyScalar(2);
@@ -147,18 +149,18 @@ export function makeMaterial(ref, opts = {}) {
     if (col && col[3] < 1 && /transparent/.test(s)) { m.transparent = true; m.opacity = col[3]; }
   }
   if (col && col[3] < 1 && m.transparent) m.opacity = col[3];
-  if (opts.lightmap) {
+  // Unity's Unlit/* shaders never sample unity_Lightmap (checked in the shipped GLSL): unlit stays unlit
+  if (opts.lightmap && !m.isMeshBasicMaterial) {
     const lm = opts.lightmap.clone();
     lm.channel = 1;
     const [sx, sy, ox, oy] = opts.lmST;
     lm.repeat.set(sx, sy); lm.offset.set(ox, oy); lm.needsUpdate = true;
-    if (m.isMeshBasicMaterial) {
-      // baked-only: unlit * lightmap (dLDR, *2)
-      m = new THREE.MeshLambertMaterial({ map: m.map, color: m.color, lightMap: lm, lightMapIntensity: 2.0 * Math.PI, emissive: 0 });
-    } else { m.lightMap = lm; m.lightMapIntensity = 2.0 * Math.PI; }
+    m.lightMap = lm; m.lightMapIntensity = 2.0 * Math.PI; // dLDR: lightmap * 2
     m.userData.lightmapped = true;
     addPatch(m, 'lm');
   }
+  // renderer layer not in any realtime directional light's culling mask: no direct light (lightmap / ambient only)
+  if (opts.noDirect && !m.isMeshBasicMaterial) addPatch(m, 'noDirect');
   applyCustomShader(m, s, def, !!opts.vcolor);
   m.userData.shader = shader; m.userData.def = def; m.name = def ? def.name : 'default';
   if (def && def.floats && def.floats._Cull === 0) m.side = THREE.DoubleSide;
@@ -170,7 +172,9 @@ export function makeMaterial(ref, opts = {}) {
 
 // Lightmapped surfaces (Unity LIGHTMAP_ON): ambient is already baked into the lightmap, and a Mixed light in
 // Subtractive mode (all scenes use m_MixedBakeMode 2) contributes no direct light either. LM.direct is set per scene.
-export const LM = { direct: { value: 1 } };
+// LM.dirMask: union of the culling masks of the scene's realtime/mixed directional lights (Light.m_CullingMask);
+// renderers on other layers get no direct light (e.g. background prefabs on layer 16 "baked", garage props).
+export const LM = { direct: { value: 1 }, dirMask: -1 };
 const LM_BEGIN = THREE.ShaderChunk.lights_fragment_begin.replace('vec3 irradiance = getAmbientLightIrradiance( ambientLightColor );', 'vec3 irradiance = vec3( 0.0 );');
 function patchLightmapped(sh) {
   sh.uniforms.zdLmDirect = LM.direct;
@@ -194,6 +198,7 @@ function runPatches(sh) {
 const MAP_SAMPLE = 'vec4 sampledDiffuseColor = texture2D( map, vMapUv );';
 const PATCHES = {
   lm: (sh) => patchLightmapped(sh),
+  noDirect: (sh) => { sh.fragmentShader = sh.fragmentShader.replace('#include <lights_fragment_end>', '#include <lights_fragment_end>\n\treflectedLight.directDiffuse = vec3( 0.0 );'); },
   // Mobile/Diffuse ColoredAlpha: albedo = lerp(tex.rgb, _Color.rgb, tex.a)
   coloredAlpha: (sh, m) => {
     sh.uniforms.zdCol = m.userData.zdU.color;

@@ -191,6 +191,7 @@ export class Rigidbody extends Component {
     PhysicsWorld.bodies.add(this);
     // attach colliders already built as statics in subtree
     for (const c of this.gameObject.GetComponentsInChildren(Collider, true)) if (c.attachedRigidbody === this) c._rebuild();
+    this._updateMass();
   }
   _applyConstraints() {
     if (!this.body) return;
@@ -208,7 +209,12 @@ export class Rigidbody extends Component {
       for (const c of this.colliders) if (c._col) c._col.setDensity(0);
       const r = Math.max(0.3, Math.cbrt(vol || 1) * 0.5); const I = this._mass * r * r * 0.4;
       this.body.setAdditionalMassProperties(this._mass, toT(this._com), { x: I, y: I, z: I }, { x: 0, y: 0, z: 0, w: 1 }, true);
-    }
+    } else if (!cols.length) {
+      // no solid collider: Rapier would leave the body massless (forces ignored); Unity still uses m_Mass
+      // (e.g. FX_bullet_trail, moved by AddForce only)
+      const I = this._mass * 0.4;
+      this.body.setAdditionalMassProperties(this._mass, { x: 0, y: 0, z: 0 }, { x: I, y: I, z: I }, { x: 0, y: 0, z: 0, w: 1 }, true);
+    } else this.body.setAdditionalMassProperties(0, { x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 0, w: 1 }, true);
   }
   _preStep() {
     if (!this.body) return;
@@ -280,7 +286,14 @@ export class Rigidbody extends Component {
     }
     return f;
   }
-  AddForce(f, mode = 0) { if (typeof f === 'number') { f = new Vector3(arguments[0], arguments[1], arguments[2]); mode = arguments[3] ?? 0; } this.flushBuild(); if (!this.body || this._isKinematic) return; this.body.applyImpulse(toT(this._imp(f, mode)), true); }
+  AddForce(f, mode = 0) {
+    if (typeof f === 'number') { f = new Vector3(arguments[0], arguments[1], arguments[2]); mode = arguments[3] ?? 0; }
+    this.flushBuild(); if (!this.body || this._isKinematic) return;
+    const imp = this._imp(f, mode);
+    // a body built this frame has no mass until Rapier's next step (impulse would be ignored): apply it as a velocity change
+    if (!(this.body.mass() > 0)) { if (this._mass > 0) this.velocity = this.velocity.add(imp.mul(1 / this._mass)); return; }
+    this.body.applyImpulse(toT(imp), true);
+  }
   AddRelativeForce(f, mode = 0) { this.AddForce(this.rotation.rotate(f), mode); }
   AddForceAtPosition(f, pos, mode = 0) { this.flushBuild(); if (!this.body || this._isKinematic) return; this.body.applyImpulseAtPoint(toT(this._imp(f, mode)), toT(pos), true); }
   AddTorque(t, mode = 0) {
@@ -351,7 +364,12 @@ export class Collider extends Component {
     const fin = (v) => Number.isFinite(v.x) && Number.isFinite(v.y) && Number.isFinite(v.z);
     if (!fin(pos) || !fin(scl) || !Number.isFinite(rot.w)) { console.warn('collider skipped (non-finite transform)', this.gameObject.name); return; }
     if (Math.abs(scl.x) < 1e-6 || Math.abs(scl.y) < 1e-6 || Math.abs(scl.z) < 1e-6) { return; } // zero-scale: Unity ignores it too
-    const desc = this._shape(new THREE.Vector3(Math.abs(scl.x), Math.abs(scl.y), Math.abs(scl.z)), !rb);
+    // mirrored transforms (negative scale, e.g. road_corner_2 (1) with scale z=-1): decompose() moves the reflection
+    // into scl.x < 0 plus a compensating rotation, so the shapes get |scale| for their extents but the signed scale
+    // for centre offsets / mesh vertices -- using |scale| alone mirrors the collider to the wrong side (car fell
+    // through the visible road behind the level-"4" (level_3_winter) canyon).
+    this._builtMirror = scl.x * scl.y * scl.z < 0;
+    const desc = this._shape(new THREE.Vector3(Math.abs(scl.x), Math.abs(scl.y), Math.abs(scl.z)), !rb, scl.clone());
     if (!desc) return;
     const centerOff = (desc._center || new THREE.Vector3()).clone();
     centerOff.applyQuaternion(rot);
@@ -392,7 +410,7 @@ export class Collider extends Component {
     if (same) return;
     this._lastMat.set(e);
     const s = new THREE.Vector3(); this.gameObject.obj.matrixWorld.decompose(_v, _q, s);
-    if (Math.abs(Math.abs(s.x) - this._builtScale.x) + Math.abs(Math.abs(s.y) - this._builtScale.y) + Math.abs(Math.abs(s.z) - this._builtScale.z) > 1e-3) { this._rebuild(); return; }
+    if (Math.abs(Math.abs(s.x) - this._builtScale.x) + Math.abs(Math.abs(s.y) - this._builtScale.y) + Math.abs(Math.abs(s.z) - this._builtScale.z) > 1e-3 || (s.x * s.y * s.z < 0) !== !!this._builtMirror) { this._rebuild(); return; }
     const off = this._centerOff.clone().applyQuaternion(_q);
     this._body.setTranslation({ x: _v.x + off.x, y: _v.y + off.y, z: _v.z + off.z }, true); this._body.setRotation(this._axisRot ? _q.clone().multiply(this._axisRot) : _q, true);
   }
@@ -436,30 +454,30 @@ export class BoxCollider extends Collider {
   static typeName = 'BoxCollider';
   constructor(go, p) { super(go, p); this._c = p.m_Center ? new THREE.Vector3(...p.m_Center) : new THREE.Vector3(); this._sz = p.m_Size ? new THREE.Vector3(...p.m_Size) : new THREE.Vector3(1, 1, 1); }
   _localBox() { const h = this._sz.clone().multiplyScalar(0.5); return new THREE.Box3(this._c.clone().sub(h), this._c.clone().add(h)); }
-  _shape(s) {
+  _shape(s, isStatic, ss = s) {   // s = |scale| (extents), ss = signed scale (centre offset)
     this._builtScale = s.clone();
     const hx = Math.max(1e-3, this._sz.x * s.x / 2), hy = Math.max(1e-3, this._sz.y * s.y / 2), hz = Math.max(1e-3, this._sz.z * s.z / 2);
-    const d = R.ColliderDesc.cuboid(hx, hy, hz); d._center = this._c.clone().multiply(s); this._volume = 8 * hx * hy * hz; return d;
+    const d = R.ColliderDesc.cuboid(hx, hy, hz); d._center = this._c.clone().multiply(ss); this._volume = 8 * hx * hy * hz; return d;
   }
 }
 export class SphereCollider extends Collider {
   static typeName = 'SphereCollider';
   constructor(go, p) { super(go, p); this._c = p.m_Center ? new THREE.Vector3(...p.m_Center) : new THREE.Vector3(); this._r = p.m_Radius ?? 0.5; }
   _localBox() { const r = this._r; return new THREE.Box3(this._c.clone().subScalar(r), this._c.clone().addScalar(r)); }
-  _shape(s) { this._builtScale = s.clone(); const r = Math.max(1e-3, this._r * Math.max(s.x, s.y, s.z)); const d = R.ColliderDesc.ball(r); d._center = this._c.clone().multiply(s); this._volume = 4.19 * r * r * r; return d; }
+  _shape(s, isStatic, ss = s) { this._builtScale = s.clone(); const r = Math.max(1e-3, this._r * Math.max(s.x, s.y, s.z)); const d = R.ColliderDesc.ball(r); d._center = this._c.clone().multiply(ss); this._volume = 4.19 * r * r * r; return d; }
 }
 export class CapsuleCollider extends Collider {
   static typeName = 'CapsuleCollider';
   constructor(go, p) { super(go, p); this._c = p.m_Center ? new THREE.Vector3(...p.m_Center) : new THREE.Vector3(); this._r = p.m_Radius ?? 0.5; this._h = p.m_Height ?? 2; this.direction = p.m_Direction ?? 1; }
   _localBox() { const r = this._r, h = Math.max(this._h / 2, r); const e = new THREE.Vector3(r, r, r); e.setComponent(this.direction, h); return new THREE.Box3(this._c.clone().sub(e), this._c.clone().add(e)); }
-  _shape(s) {
+  _shape(s, isStatic, ss = s) {
     this._builtScale = s.clone();
     const ax = this.direction; const comps = [s.x, s.y, s.z]; const along = comps[ax]; const across = Math.max(...comps.filter((_, i) => i !== ax));
     const r = Math.max(1e-3, this._r * across); const half = Math.max(0, this._h * along / 2 - r);
     const d = R.ColliderDesc.capsule(half, r);
     if (ax === 0) d._axisRot = new THREE.Quaternion(0, 0, Math.SQRT1_2, Math.SQRT1_2);
     if (ax === 2) d._axisRot = new THREE.Quaternion(Math.SQRT1_2, 0, 0, Math.SQRT1_2);
-    d._center = this._c.clone().multiply(s); this._volume = Math.PI * r * r * (2 * half + 4 / 3 * r); return d;
+    d._center = this._c.clone().multiply(ss); this._volume = Math.PI * r * r * (2 * half + 4 / 3 * r); return d;
   }
 }
 export class MeshCollider extends Collider {
@@ -468,18 +486,21 @@ export class MeshCollider extends Collider {
   _localBox() { const g = getGeometrySync(this.meshRef); return g && g.boundingBox ? g.boundingBox.clone() : super._localBox(); }
   get sharedMesh() { return this.meshRef; }
   set sharedMesh(v) { this.meshRef = v; if (v) loadGeometry(v).then(() => this._rebuild()); }
-  _shape(s, isStatic) {
+  _shape(s, isStatic, ss = s) {
     this._builtScale = s.clone();
     const g = getGeometrySync(this.meshRef);
     if (!g) { if (this.meshRef) loadGeometry(this.meshRef).then(() => { if (!this.destroyed) this._rebuild(); }); return null; }
+    // bake the SIGNED scale into the vertices (mirrored instances keep their reflection)
     const src = g.attributes.position.array; const v = new Float32Array(src.length);
-    for (let i = 0; i < src.length; i += 3) { v[i] = src[i] * s.x; v[i + 1] = src[i + 1] * s.y; v[i + 2] = src[i + 2] * s.z; }
+    for (let i = 0; i < src.length; i += 3) { v[i] = src[i] * ss.x; v[i + 1] = src[i + 1] * ss.y; v[i + 2] = src[i + 2] * ss.z; }
+    const mirror = ss.x * ss.y * ss.z < 0;
     g.computeBoundingBox(); const sz = new THREE.Vector3(); g.boundingBox.getSize(sz); this._volume = Math.max(1e-3, sz.x * s.x * sz.y * s.y * sz.z * s.z);
     if (this.convex || (!isStatic && !this.isTrigger)) {
       const d = R.ColliderDesc.convexHull(v); if (d) return d;
     }
     const idx = g.index ? new Uint32Array(g.index.array) : null;
     if (!idx) return R.ColliderDesc.convexHull(v);
+    if (mirror) for (let i = 0; i + 2 < idx.length; i += 3) { const t = idx[i + 1]; idx[i + 1] = idx[i + 2]; idx[i + 2] = t; }   // keep triangle normals outward
     if (this.isTrigger) return R.ColliderDesc.convexHull(v) || R.ColliderDesc.trimesh(v, idx);
     return R.ColliderDesc.trimesh(v, idx);
   }
