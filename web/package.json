@@ -1,0 +1,17 @@
+{
+  "name": "zombie-derby-pixel-survival-web",
+  "version": "1.0.29",
+  "private": true,
+  "type": "module",
+  "description": "JS/WebGL port of Zombie Derby: Pixel Survival (ads/SDK-free)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "0.14.0",
+    "three": "0.170.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  }
+}

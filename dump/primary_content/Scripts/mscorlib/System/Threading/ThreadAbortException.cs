@@ -1,0 +1,16 @@
+using System.Runtime.Serialization;
+
+namespace System.Threading;
+
+/// <summary>The exception that is thrown when a call is made to the <see cref="M:System.Threading.Thread.Abort(System.Object)" /> method. This class cannot be inherited.</summary>
+[Serializable]
+public sealed class ThreadAbortException : SystemException
+{
+	private ThreadAbortException()
+	{
+	}
+
+	internal ThreadAbortException(SerializationInfo info, StreamingContext context)
+	{
+	}
+}

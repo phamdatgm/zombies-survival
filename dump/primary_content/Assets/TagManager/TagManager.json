@@ -1,0 +1,61 @@
+{
+	"m_Layers": [
+		"Default",
+		"TransparentFX",
+		"Ignore Raycast",
+		"",
+		"Water",
+		"UI",
+		"",
+		"",
+		"car",
+		"wheel",
+		"ground",
+		"zombie",
+		"zombie_parts",
+		"dynamic_obstacle",
+		"dyn_obst_nofire",
+		"dyn_obst_trigger",
+		"baked",
+		"Default_NoProjector",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		""
+	],
+	"m_SortingLayers": [
+		{
+			"m_Locked": false,
+			"m_Name": "Default",
+			"m_UniqueID": 0
+		}
+	],
+	"m_Tags": [
+		"bomb",
+		"barrel",
+		"barrel_big",
+		"barrel_throw",
+		"zombie",
+		"bird",
+		"bird_spawn",
+		"metal_box",
+		"wood_box",
+		"World",
+		"Target",
+		"FX",
+		"tramplin_barrel",
+		"pumpkin",
+		"bat",
+		"Admix"
+	]
+}

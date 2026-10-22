@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/garage.unity
+    guid: c40bec047a8ef384789269e023c64f1c
+  - enabled: 1
+    path: Assets/Scenes/level_000.unity
+    guid: 5d027c55b7602ea46bd7b9b77c4681fd
+  - enabled: 1
+    path: Assets/Scenes/level_0.unity
+    guid: 7d445b38acfa80c4896b0631cfbcf8eb
+  - enabled: 1
+    path: Assets/Scenes/level_1_beach.unity
+    guid: 1f70e1c3af7662748915bb74865df6b1
+  - enabled: 1
+    path: Assets/Scenes/level_2_desert.unity
+    guid: bea948ac7d8dd564fbd127523850afa8
+  - enabled: 1
+    path: Assets/Scenes/level_3_winter.unity
+    guid: 385ecd4ddffd3ea4f93607bfacb1db76
+  - enabled: 1
+    path: Assets/Scenes/level_4_city.unity
+    guid: 638533686817eb64cb54d08c48896b59
+  - enabled: 1
+    path: Assets/Scenes/level_5_beach.unity
+    guid: 6c89bb11267925942a9cc9a426bc65df
+  - enabled: 1
+    path: Assets/Scenes/level_6_desert.unity
+    guid: eccf03bd946a3d34292973cd90cc29ad
+  - enabled: 1
+    path: Assets/Scenes/level_7_winter.unity
+    guid: 3ac9a49b50f701345abfb7ca95e47ee2
+  - enabled: 1
+    path: Assets/Scenes/level_8_city.unity
+    guid: 5d6f5ccf8c3bc3448aa5e8a239a3c66f
+  - enabled: 1
+    path: Assets/Scenes/level_9_beach.unity
+    guid: f7135a8b262407a46a14a9d182bda255
+  - enabled: 1
+    path: Assets/Scenes/level_10_desert.unity
+    guid: 7c3b4d3a290dbb24cb5abf7c72857585
+  - enabled: 1
+    path: Assets/Scenes/level_event_1.unity
+    guid: 94b2ef7443b93884ca424aa0095b4cdc
+  - enabled: 1
+    path: Assets/Scenes/level_event_2.unity
+    guid: 77481162d6a96dd4590d88b925a59914
+  - enabled: 1
+    path: Assets/Scenes/level_event_3.unity
+    guid: 900a3f81a8d77e8489df9b92875f7abb
+  - enabled: 1
+    path: Assets/Scenes/level_event_4.unity
+    guid: 8fc55ad013b982a489861b5a89909f27
+  - enabled: 1
+    path: Assets/Scenes/level_event_5.unity
+    guid: c7b19461b9a424e4b8b5ba89221f41de
+  - enabled: 1
+    path: Assets/Scenes/level_event_6.unity
+    guid: ac2ae32a5d753a2439cc2e21a8659ab6
+  - enabled: 1
+    path: Assets/Scenes/level_event_7.unity
+    guid: 416ab37e2fecdbe48ac376a704f5080a
+  m_configObjects: {}

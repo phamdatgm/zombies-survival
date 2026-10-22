@@ -1,0 +1,1262 @@
+fileFormatVersion: 2
+guid: 8619205234e339943a42a5654f3868c4
+timeCreated: 1792219518
+licenseType: Free
+TextureImporter:
+  serializedVersion: 13
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: button_music_off
+  - first:
+      213: 21300002
+    second: chinese_simplified
+  - first:
+      213: 21300004
+    second: google_play_off
+  - first:
+      213: 21300006
+    second: germany
+  - first:
+      213: 21300008
+    second: turkish
+  - first:
+      213: 21300010
+    second: chinese_traditional
+  - first:
+      213: 21300012
+    second: button_off
+  - first:
+      213: 21300014
+    second: gfx_ultra
+  - first:
+      213: 21300016
+    second: button_on
+  - first:
+      213: 21300018
+    second: italy
+  - first:
+      213: 21300020
+    second: sync_server
+  - first:
+      213: 21300022
+    second: poland
+  - first:
+      213: 21300024
+    second: portugal
+  - first:
+      213: 21300026
+    second: spain
+  - first:
+      213: 21300028
+    second: button_sound_off
+  - first:
+      213: 21300030
+    second: united-kingdom
+  - first:
+      213: 21300032
+    second: ukraine
+  - first:
+      213: 21300034
+    second: game_center_on
+  - first:
+      213: 21300036
+    second: game_center_off
+  - first:
+      213: 21300038
+    second: controls_tilt
+  - first:
+      213: 21300040
+    second: button_sound_on
+  - first:
+      213: 21300042
+    second: gfx_high
+  - first:
+      213: 21300044
+    second: russia
+  - first:
+      213: 21300046
+    second: controls_buttons
+  - first:
+      213: 21300048
+    second: button_music_on
+  - first:
+      213: 21300050
+    second: google_play_on
+  - first:
+      213: 21300052
+    second: sync_local
+  - first:
+      213: 21300054
+    second: gfx_low
+  - first:
+      213: 21300056
+    second: france
+  - first:
+      213: 21300058
+    second: japanese
+  - first:
+      213: 21300060
+    second: button_info
+  externalObjects: {}
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 47
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 0
+  flipbookColumns: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: button_music_off
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 130
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 65, y: -66}
+        - {x: -65, y: -66}
+        - {x: -65, y: 66}
+        - {x: 65, y: 66}
+      physicsShape:
+      - - {x: -65, y: 66}
+        - {x: -65, y: -66}
+        - {x: 65, y: -66}
+        - {x: 65, y: 66}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37f800b99d474606a213964bfcb2cc70
+      internalID: 21300000
+      vertices:
+      - {x: 0, y: 132}
+      - {x: 130, y: 0}
+      - {x: 130, y: 132}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chinese_simplified
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 136
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf5922be001d418099552f5db59374ba
+      internalID: 21300002
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: google_play_off
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 252
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5833ffd355f4675af79a66fd908b279
+      internalID: 21300004
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: germany
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 272
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06dc979ebb4f45adaab28c6c0a94d145
+      internalID: 21300006
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: turkish
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 272
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b3099b1b7af43e3a4ebcae2164cdc7d
+      internalID: 21300008
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chinese_traditional
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 136
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98020d4409e74cc5998dcbf5d8d3c3a1
+      internalID: 21300010
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_off
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 368
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9aa0972bd5164f02b78198b929c30018
+      internalID: 21300012
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gfx_ultra
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 388
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45627cff69a646acb509e4ccd7c376ff
+      internalID: 21300014
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_on
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 368
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bda8abfb8814c8eb50e1a105cd966f5
+      internalID: 21300016
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: italy
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 0
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 387660e59b504254b484e789aada5db6
+      internalID: 21300018
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sync_server
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 443
+        width: 97
+        height: 58
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -41.5, y: -29}
+        - {x: -48.5, y: -22}
+        - {x: -48.5, y: 7}
+        - {x: -22.5, y: 29}
+        - {x: 37.5, y: 29}
+        - {x: 48.5, y: 3}
+        - {x: 48.5, y: -29}
+      physicsShape:
+      - - {x: 36.499996, y: 9.999999}
+        - {x: 25.5, y: 29}
+        - {x: -11.499999, y: 29}
+        - {x: -19.5, y: 22}
+        - {x: -41.5, y: 14.999999}
+        - {x: -48.5, y: 4}
+        - {x: -48.5, y: -19}
+        - {x: -47.5, y: -21}
+        - {x: -41.5, y: -29}
+        - {x: 42.5, y: -29}
+        - {x: 48.5, y: -24}
+        - {x: 48.5, y: -2}
+      tessellationDetail: 0
+      bones: []
+      spriteID: af3f4f43e7c44338a24d1f15b1ac4edf
+      internalID: 21300020
+      vertices:
+      - {x: 86, y: 58}
+      - {x: 97, y: 0}
+      - {x: 97, y: 32}
+      - {x: 26, y: 58}
+      - {x: 7, y: 0}
+      - {x: 0, y: 36}
+      - {x: 0, y: 7}
+      indices: 060000000500000004000000030000000400000005000000010000000400000003000000000000000100000003000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: poland
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 0
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b512653b348343839db71ceefb67ebe6
+      internalID: 21300022
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portugal
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 116
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d976858e62c04d0e9f18ab9d80939af6
+      internalID: 21300024
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spain
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 232
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8a482a203a24da580c4fc3668245d45
+      internalID: 21300026
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_sound_off
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 0
+        width: 130
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 65, y: -66}
+        - {x: -65, y: -66}
+        - {x: -65, y: 66}
+        - {x: 65, y: 66}
+      physicsShape:
+      - - {x: -65, y: 66}
+        - {x: -65, y: -66}
+        - {x: 65, y: -66}
+        - {x: 65, y: 66}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a4ea39e33df44f18dda2fac45140dcb
+      internalID: 21300028
+      vertices:
+      - {x: 0, y: 132}
+      - {x: 130, y: 0}
+      - {x: 130, y: 132}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: united-kingdom
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 0
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7ada93aa1894f6b8bdb4677567999db
+      internalID: 21300030
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ukraine
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 348
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16328aa8e8d14153944fa16c427dc0bb
+      internalID: 21300032
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_center_on
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 0
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a275e4f8e4194580ba861445345d49d9
+      internalID: 21300034
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game_center_off
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 0
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a9b0771d8dd46939040a4d56280489f
+      internalID: 21300036
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: controls_tilt
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 116
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc5b984411a944408004b47b404b1cca
+      internalID: 21300038
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_sound_on
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 0
+        width: 130
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 65, y: -66}
+        - {x: -65, y: -66}
+        - {x: -65, y: 66}
+        - {x: 65, y: 66}
+      physicsShape:
+      - - {x: -65, y: 66}
+        - {x: -65, y: -66}
+        - {x: 65, y: -66}
+        - {x: 65, y: 66}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d72677db0d13489a9889a44a0e117565
+      internalID: 21300040
+      vertices:
+      - {x: 0, y: 132}
+      - {x: 130, y: 0}
+      - {x: 130, y: 132}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gfx_high
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 116
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b7cedec85514d35938947116ba6cc00
+      internalID: 21300042
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: russia
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 232
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d09442023b747d48f359c2dfaed5e4d
+      internalID: 21300044
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: controls_buttons
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 348
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ac5257b7c444861a5053eb9e064f7a9
+      internalID: 21300046
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_music_on
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 136
+        width: 130
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 65, y: -66}
+        - {x: -65, y: -66}
+        - {x: -65, y: 66}
+        - {x: 65, y: 66}
+      physicsShape:
+      - - {x: -65, y: 66}
+        - {x: -65, y: -66}
+        - {x: 65, y: -66}
+        - {x: 65, y: 66}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8399783f8dc24f47b23a6a41f11b3ca6
+      internalID: 21300048
+      vertices:
+      - {x: 0, y: 132}
+      - {x: 130, y: 0}
+      - {x: 130, y: 132}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: google_play_on
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 232
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e14abe12bcd54188b7957c9648b10468
+      internalID: 21300050
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sync_local
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 348
+        width: 70
+        height: 91
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 34, y: -45.5}
+        - {x: -35, y: -45.5}
+        - {x: -35, y: 45.5}
+        - {x: 35, y: 45.5}
+        - {x: 35, y: -43.5}
+      physicsShape:
+      - - {x: -31, y: 45.5}
+        - {x: -35, y: 41.5}
+        - {x: -35, y: -41.5}
+        - {x: -31, y: -45.5}
+        - {x: 31, y: -45.5}
+        - {x: 35, y: -41.5}
+        - {x: 35, y: 41.5}
+        - {x: 31, y: 45.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2d58deb3ec74091a8a9f77f7f5a231e
+      internalID: 21300052
+      vertices:
+      - {x: 70, y: 91}
+      - {x: 69, y: 0}
+      - {x: 70, y: 2}
+      - {x: 0, y: 91}
+      - {x: 0, y: 0}
+      indices: 040000000300000001000000000000000100000003000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gfx_low
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 116
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae1a8c7c1cbe441a8c714ef6d53c0339
+      internalID: 21300054
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: france
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 232
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0311350d877b4c56b245a95f60a7c233
+      internalID: 21300056
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: japanese
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 348
+        width: 112
+        height: 112
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 56, y: -56}
+        - {x: -56, y: -56}
+        - {x: -56, y: 56}
+        - {x: 56, y: 56}
+      physicsShape:
+      - - {x: -56, y: 56}
+        - {x: -56, y: -56}
+        - {x: 56, y: -56}
+        - {x: 56, y: 56}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9c121c5b46b419d9b682f2c1156b64c
+      internalID: 21300058
+      vertices:
+      - {x: 0, y: 112}
+      - {x: 112, y: 0}
+      - {x: 112, y: 112}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_info
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 136
+        width: 130
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 65, y: -66}
+        - {x: -65, y: -66}
+        - {x: -65, y: 66}
+        - {x: 65, y: 66}
+      physicsShape:
+      - - {x: -65, y: 66}
+        - {x: -65, y: -66}
+        - {x: 65, y: -66}
+        - {x: 65, y: 66}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1553272f5994dfa986ae7b2ee060fd6
+      internalID: 21300060
+      vertices:
+      - {x: 0, y: 132}
+      - {x: 130, y: 0}
+      - {x: 130, y: 132}
+      - {x: 0, y: 0}
+      indices: 030000000000000001000000020000000100000000000000
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID:
+    internalID: 0
+    vertices: []
+    indices:
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName:
+  output:
+    textureImportInstructions:
+      compressedFormat: 0
+      uncompressedFormat: 0
+      desiredFormat: 0
+      usageMode: 0
+      colorSpace: 0
+      androidETC2FallbackFormat: 0
+      width: 0
+      height: 0
+      depth: 0
+      cubeIntermediateSize: 0
+      cubeMode: 0
+      cubeLayout: 0
+      compressionQuality: 0
+      androidETC2FallbackDownscale: 0
+      vtOnly: 0
+    sourceTextureInformation:
+      width: 0
+      height: 0
+      doesTextureContainAlpha: 0
+      sourceWasHDR: 0
+    importInspectorWarnings:
+  pSDRemoveMatte: 0
+  userData:
+  assetBundleName:
+  assetBundleVariant:

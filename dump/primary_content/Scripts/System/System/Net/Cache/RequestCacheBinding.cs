@@ -1,0 +1,8 @@
+namespace System.Net.Cache;
+
+internal class RequestCacheBinding
+{
+	private RequestCache m_RequestCache;
+
+	private RequestCacheValidator m_CacheValidator;
+}

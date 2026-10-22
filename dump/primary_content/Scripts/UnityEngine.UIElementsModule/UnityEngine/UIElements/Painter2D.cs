@@ -1,0 +1,44 @@
+using System;
+using Unity.Profiling;
+using UnityEngine.UIElements.UIR;
+
+namespace UnityEngine.UIElements;
+
+public class Painter2D : IDisposable
+{
+	private MeshGenerationContext m_Ctx;
+
+	internal DetachedAllocator m_DetachedAllocator;
+
+	internal SafeHandleAccess m_Handle;
+
+	private bool m_Disposed;
+
+	private static float s_MaxArcRadius;
+
+	private static readonly ProfilerMarker s_StrokeMarker;
+
+	private static readonly ProfilerMarker s_FillMarker;
+
+	internal static bool isPainterActive { set; }
+
+	internal Painter2D(MeshGenerationContext ctx)
+	{
+	}
+
+	public Painter2D()
+	{
+	}
+
+	internal void Reset()
+	{
+	}
+
+	public void Dispose()
+	{
+	}
+
+	private void Dispose(bool disposing)
+	{
+	}
+}

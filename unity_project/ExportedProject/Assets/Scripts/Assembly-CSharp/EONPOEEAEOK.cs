@@ -1,0 +1,25 @@
+public enum EONPOEEAEOK
+{
+	zombie_crawl_1_parts = 0,
+	zombie_crawl_2_parts = 1,
+	zombie_crawl_3_parts = 2,
+	zombie_walk_1_parts = 3,
+	zombie_walk_2_parts = 4,
+	zombie_walk_3_parts = 5,
+	zombie_walk_4_parts = 6,
+	zombie_fat_1_parts = 7,
+	zombie_fat_2_parts = 8,
+	zombie_cat_parts = 9,
+	zombie_dog_parts = 10,
+	zombie_run_fire_parts = 11,
+	zombie_run_dynamite_parts = 12,
+	zombie_walk_fire_parts = 13,
+	zombie_walk_shield_parts = 14,
+	zombie_with_barrel_parts = 15,
+	zombie_sidewalk_parts = 16,
+	zombie_tank_parts = 17,
+	zombie_halloween_1_parts = 18,
+	zombie_halloween_2_parts = 19,
+	zombie_halloween_3_parts = 20,
+	zombie_halloween_4_parts = 21
+}
