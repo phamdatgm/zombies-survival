@@ -6,6 +6,7 @@ import { SceneManager } from '../engine/scene.js';
 import { Resources, PlayerPrefs } from '../engine/unity.js';
 import { Audio } from '../engine/audio.js';
 import { setLoading } from '../main.js';
+import { installCheats } from './cheats.js';
 
 export async function startGame() {
   setLoading(0.1, 'Loading scripts…');
@@ -13,6 +14,7 @@ export async function startGame() {
   await PlayerPrefs.init();   // load the save (IndexedDB / localStorage) before any script reads it
   G.fieldTypes = await fetch('src/game/fieldtypes.json').then((r) => r.json());
   await import('./scripts/index.js');
+  installCheats();
   Lang.load(Lang.detect());
   setLoading(0.2, 'Loading prefabs…');
   await Resources.preloadAll((p) => setLoading(0.2 + p * 0.6, 'Loading prefabs…'));

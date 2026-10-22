@@ -15,6 +15,7 @@ Không cần build. Thư viện (three.js r170, Rapier 0.14) đã nằm sẵn tr
 
 Điều khiển trên máy tính: `W`/`↑` ga, `S`/`↓` phanh, `A`/`D` hoặc `←`/`→` nghiêng xe, `Space` bắn, `Shift`/`N` nitro, `Esc` tạm dừng.
 Trên điện thoại dùng các nút cảm ứng như bản gốc. Tay cầm (Gamepad API) cũng dùng được.
+Cheat: `C` cộng 100.000 bạc, `V` cộng 1.000 vàng (dùng được ở mọi màn hình, lưu vào save như tiền kiếm được).
 
 Các chế độ debug:
 - `?view=level_1_beach` — bay tự do trong một scene (WASD/QE, giữ chuột để xoay, `goto=<tên object>`).
